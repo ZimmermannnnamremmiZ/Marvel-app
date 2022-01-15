@@ -22,20 +22,11 @@ class RandomChar extends Component {
     marvelService = new MarvelService();
 
     updateCharacter = () => {
-        // const id = Math.floor(Math.random()*(1011400-1011000)+1011000);
+        const id = Math.floor(Math.random()*(1011400-1011000)+1011000);
 
-        const id = 1011006
         this.marvelService
             .getCharacter(id)
             .then(this.onCharacterLoaded)
-    }
-
-    checkEmpty = (item) => {
-        if (item === '') {
-            return 'Character description missing'
-        }
-        console.log(item)
-        return item
     }
 
     render() {
@@ -48,7 +39,7 @@ class RandomChar extends Component {
                     <div className="randomchar__info">
                         <p className="randomchar__name">{name}</p>
                         <p className="randomchar__descr">
-                           {this.checkEmpty(description)}
+                           {description}
                         </p>
                         <div className="randomchar__btns">
                             <a href={homepage} className="button button__main">
