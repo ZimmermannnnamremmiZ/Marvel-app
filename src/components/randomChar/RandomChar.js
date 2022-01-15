@@ -1,8 +1,9 @@
 import { Component } from 'react';
+import MarvelService from '../../services/MarvelService';
 
 import './randomChar.scss';
 import mjolnir from '../../resources/img/mjolnir.png';
-import MarvelService from '../../services/MarvelService';
+
 
 class RandomChar extends Component {
     constructor(props) {
@@ -11,32 +12,34 @@ class RandomChar extends Component {
     }
 
     state = {
-        name: null,
-        description: null,
-        thumbnail: null,
-        homepage: null,
-        wiki: null
+        character: {}
+    }
+
+    onCharacterLoaded = (character) => {
+        this.setState({character})
     }
 
     marvelService = new MarvelService();
 
     updateCharacter = () => {
-        const id = Math.floor(Math.random() * (1011400 - 1011000));
+        // const id = Math.floor(Math.random()*(1011400-1011000)+1011000);
+
+        const id = 1011006
         this.marvelService
             .getCharacter(id)
-            .then(res => {
-                this.setState({
-                    name: res.data.results[0].name,
-                    description: res.data.results[0].description,
-                    thumbnail: res.data.results[0].thumbnail.path + '.' + res.data.results[0].thumbnail.extension,
-                    homepage: res.data.results[0].urls[0].url,
-                    wiki: res.data.results[0].urls[1].url
-                })
-            })
+            .then(this.onCharacterLoaded)
+    }
+
+    checkEmpty = (item) => {
+        if (item === '') {
+            return 'Character description missing'
+        }
+        console.log(item)
+        return item
     }
 
     render() {
-        const {name, description, thumbnail, homepage, wiki} = this.state
+        const {character: {name, description, thumbnail, homepage, wiki}} = this.state
 
         return (
             <div className="randomchar">
@@ -45,11 +48,11 @@ class RandomChar extends Component {
                     <div className="randomchar__info">
                         <p className="randomchar__name">{name}</p>
                         <p className="randomchar__descr">
-                           {description}
+                           {this.checkEmpty(description)}
                         </p>
                         <div className="randomchar__btns">
-                            <a href="#" className="button button__main">
-                                <div className="inner">{homepage}</div>
+                            <a href={homepage} className="button button__main">
+                                <div className="inner">homepage</div>
                             </a>
                             <a href={wiki} className="button button__secondary">
                                 <div className="inner">Wiki</div>
