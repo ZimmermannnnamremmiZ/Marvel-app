@@ -1,14 +1,23 @@
 import { Component } from 'react';
 import Characters from './Characters'
-
+import Spinner from '../spinner/Spinner';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 import MarvelService from '../../services/MarvelService';
 
 import './charList.scss';
 
 class CharList extends Component {
     state = {
-        characters: {},
+        characters: [],
         loading: true,
+        error: false,
+    }
+
+    onError = () => {
+        this.setState({
+            loading: false,
+            error: true
+        })
     }
 
     onCharacterLoaded = (characters) => {
@@ -18,31 +27,30 @@ class CharList extends Component {
         })
     }
 
-    renderChars = (characters) => {
-        return console.log(characters)
-    }
-
     marvelService = new MarvelService();
 
     getCharacters = () => {
         this.marvelService
             .getAllCharacters()
             .then(this.onCharacterLoaded)
+            .catch(this.onError)
     }
 
     componentDidMount() {
-        console.log('mount')
         this.getCharacters();
     }
 
     render() {
-        const {characters} = this.state
+        const {characters, loading, error} = this.state;
+        const errorMessage = error ? "Sorry, error :(" : null;
+        const spinner = loading ? <Spinner /> : null;
+        const content = !(loading || error) ? <Characters characters={characters}/> : null;
 
         return (
             <div className="char__list">
-                <ul className="char__grid">
-                    <Characters characters={characters}/>
-                </ul>
+                    {errorMessage}
+                    {spinner}
+                    {content}
                 <button className="button button__main button__long">
                     <div className="inner">load more</div>
                 </button>
