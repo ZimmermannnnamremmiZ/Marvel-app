@@ -9,10 +9,6 @@ import mjolnir from '../../resources/img/mjolnir.png';
 
 
 class RandomChar extends Component {
-    constructor(props) {
-        super(props)
-        console.log('constructor')
-    }
     state = {
         character: {},
         loading: true,
@@ -46,19 +42,16 @@ class RandomChar extends Component {
     }
 
     componentDidMount() {
-        console.log('mount')
         this.updateCharacter();
 
         // this.timerId = setInterval(this.updateCharacter, 4000);
     }
 
-    componentWillUnmount() {
-        console.log('unmount')
-        clearInterval(this.timerId)
-    }
+    // componentWillUnmount() {
+    //     clearInterval(this.timerId)
+    // }
 
     render() {
-        console.log('render')
         const {character, loading, error} = this.state;
         const errorMessage = error ? <ErrorMessage /> : null;
         const spinner = loading ? <Spinner /> : null;
@@ -91,7 +84,7 @@ const View = ({character}) => {
 
     const {name, description, thumbnail, homepage, wiki} = character;
     const checkThumbnail = () => {
-        return thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {objectFit: 'contain'} : {objectFit: 'cover'};
+        return thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {objectFit: 'initial'} : {objectFit: 'cover'};
     }
 
     return (

@@ -1,89 +1,28 @@
-import { Component } from 'react';
-import MarvelService from '../../services/MarvelService';
-import Spinner from '../spinner/Spinner';
-import ErrorMessage from '../errorMessage/ErrorMessage';
+import { v4 as uuidv4 } from 'uuid';
 
-import './charList.scss';
-import abyss from '../../resources/img/abyss.jpg';
+const Characters = (props) => {
+
+        const {characters} = props;
+        const checkThumbnail = (item) => {
+            return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {objectFit: 'initial'} : {objectFit: 'cover'};
+        }
+
+        const everyChar= characters.map(item => {
+
+            return (
+                <li className="char__item" key={uuidv4()}>
+                    <img style={checkThumbnail(item.thumbnail)} src={item.thumbnail} alt={item.name}/>
+                    <div className="char__name">{item.name}</div>
+                </li>
+            )
+        })
 
 
-class Characters extends Component {
-    state = {
-        chars: this.props.characters
-    }
-
-    // onCharacterLoaded = (characters) => {
-    //     this.setState({
-    //         characters,
-    //         loading: false
-    //     })
-    // }
-
-    // renderChars = (characters) => {
-    //     return console.log(characters)
-    // }
-
-    // marvelService = new MarvelService();
-
-    // getCharacters = () => {
-    //     this.marvelService
-    //         .getAllCharacters()
-    //         .then(this.onCharacterLoaded)
-    // }
-
-    test = () => {
-        console.log(this.state.characters)
-    }
-
-    componentDidMount() {
-        // console.log('mount')
-        // this.getCharacters();
-        
-    }
-    
-    render() {
         return (
-            <>
-                <button onClick={this.test}></button>
-                <li className="char__item">
-                    <img src={abyss} alt="abyss"/>
-                    <div className="char__name">Abyss</div>
-                </li>
-                <li className="char__item char__item_selected">
-                    <img src={abyss} alt="abyss"/>
-                    <div className="char__name">Abyss</div>
-                </li>
-                <li className="char__item">
-                    <img src={abyss} alt="abyss"/>
-                    <div className="char__name">Abyss</div>
-                </li>
-                <li className="char__item">
-                    <img src={abyss} alt="abyss"/>
-                    <div className="char__name">Abyss</div>
-                </li>
-                <li className="char__item">
-                    <img src={abyss} alt="abyss"/>
-                    <div className="char__name">Abyss</div>
-                </li>
-                <li className="char__item">
-                    <img src={abyss} alt="abyss"/>
-                    <div className="char__name">Abyss</div>
-                </li>
-                <li className="char__item">
-                    <img src={abyss} alt="abyss"/>
-                    <div className="char__name">Abyss</div>
-                </li>
-                <li className="char__item">
-                    <img src={abyss} alt="abyss"/>
-                    <div className="char__name">Abyss</div>
-                </li>
-                <li className="char__item">
-                    <img src={abyss} alt="abyss"/>
-                    <div className="char__name">Abyss</div>
-                </li>
-            </>
+            <ul className="char__grid">
+              {everyChar}
+            </ul>
         )
-    }
 }
 
 export default Characters;
