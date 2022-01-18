@@ -1,7 +1,6 @@
 import { Component } from 'react';
 import Characters from './Characters'
 import Spinner from '../spinner/Spinner';
-import ErrorMessage from '../errorMessage/ErrorMessage';
 import MarvelService from '../../services/MarvelService';
 
 import './charList.scss';
@@ -44,7 +43,7 @@ class CharList extends Component {
         const {characters, loading, error} = this.state;
         const errorMessage = error ? "Sorry, error :(" : null;
         const spinner = loading ? <Spinner /> : null;
-        const content = !(loading || error) ? <Characters characters={characters}/> : null;
+        const content = !(loading || error) ? <Characters onCharacterSelected={this.props.onCharacterSelected} characters={characters}/> : null;
 
         return (
             <div className="char__list">
