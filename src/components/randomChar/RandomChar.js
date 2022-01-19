@@ -12,8 +12,7 @@ class RandomChar extends Component {
     state = {
         character: {},
         loading: true,
-        error: false,
-
+        error: false
     }
 
     onError = () => {
@@ -49,7 +48,6 @@ class RandomChar extends Component {
 
     componentDidMount() {
         this.updateCharacter();
-
         // this.timerId = setInterval(this.updateCharacter, 4000);
     }
 
