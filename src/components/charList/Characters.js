@@ -1,16 +1,18 @@
-import React, { Component } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Characters extends Component {
-    myRef = []  
-    
+    charRefs = [];
+
     setRef = elem => {
-        this.myRef.push(elem)
+        this.charRefs.push(elem)
     }
 
     test = (id) => {
-        this.myRef.forEach(() => {})
-    }
+        this.charRefs.forEach(item => item.classList.remove('char__item_selected'))
+        this.charRefs[id].classList.add('char__item_selected')
+        this.charRefs[id].focus()
+        }
 
 
     render() {
@@ -20,15 +22,15 @@ class Characters extends Component {
             return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {objectFit: 'initial'} : {objectFit: 'cover'};
         }
 
-        const everyChar= characters.map(item => {
+        const everyChar= characters.map((item, i) => {
 
             return (
-                <li 
+                <li
                     ref={this.setRef}
                     className="char__item"
-                    key={uuidv4()}
+                    key={item.id}
                     onClick={() => {onCharacterSelected(item.id);
-                                    this.test(item.id)}}
+                                    this.test(i)}}
                     >
                     <img style={checkThumbnail(item.thumbnail)} src={item.thumbnail} alt={item.name}/>
                     <div className="char__name">{item.name}</div>
@@ -43,6 +45,10 @@ class Characters extends Component {
             </ul>
         )
     }
+}
+
+Characters.propTypes = {
+    onCharacterSelected: PropTypes.func.isRequired
 }
 
 export default Characters;
