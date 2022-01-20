@@ -2,6 +2,7 @@ import { Component } from 'react';
 import Characters from './Characters'
 import Spinner from '../spinner/Spinner';
 import MarvelService from '../../services/MarvelService';
+import PropTypes from 'prop-types';
 
 import './charList.scss';
 
@@ -80,11 +81,8 @@ class CharList extends Component {
     }
 }
 
+CharList.propTypes = {                                                        // https://ru.reactjs.org/docs/typechecking-with-proptypes.html
+    onCharacterSelected: PropTypes.func.isRequired
+}
 
 export default CharList;
-
-
-// <li className="char__item char__item_selected">
-// <img src={abyss} alt="abyss"/>
-// <div className="char__name">Abyss</div>
-// </li>
