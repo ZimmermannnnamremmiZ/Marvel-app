@@ -8,11 +8,11 @@ class Characters extends Component {
         this.charRefs.push(elem)
     }
 
-    test = (id) => {
+    onCharacterFocus = (id) => {
         this.charRefs.forEach(item => item.classList.remove('char__item_selected'))
         this.charRefs[id].classList.add('char__item_selected')
         this.charRefs[id].focus()
-        }
+    }
 
 
     render() {
@@ -27,11 +27,18 @@ class Characters extends Component {
             return (
                 <li
                     ref={this.setRef}
+                    tabIndex={0}
                     className="char__item"
                     key={item.id}
                     onClick={() => {onCharacterSelected(item.id);
-                                    this.test(i)}}
-                    >
+                                    this.onCharacterFocus(i)}}
+                    onKeyPress={(el) => {
+                        if (el.key === ' ' || el.key === 'Enter') {
+                            onCharacterSelected(item.id);
+                            this.onCharacterFocus(i)
+                        }
+                    }}
+                >
                     <img style={checkThumbnail(item.thumbnail)} src={item.thumbnail} alt={item.name}/>
                     <div className="char__name">{item.name}</div>
                 </li>

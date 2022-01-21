@@ -29,8 +29,9 @@
             transform: translate(-15px, -15px);
         }
         &_selected {
-            box-shadow: 0 0 40px $charHover;
+            box-shadow: $charHover;
             transform: translateY(-8px);
+            @include shadow
         }
     }
     &__name {
