@@ -1,4 +1,16 @@
 $main-color: #8d0414;
 $dark: #232222;
 $grey: #5C5C5C;
-$charHover: #6b003e
+$charHover: #6b003e;
+
+@mixin shadow {
+    animation: flickerShadow 2s ease-in-out infinite;;
+}
+
+@keyframes flickerShadow {
+    0% {box-shadow: 0 0 0 $charHover}
+    25% {box-shadow: 0 0 20px $charHover}
+    50% {box-shadow: 0 0 40px $charHover}
+    75% {box-shadow: 0 0 20px $charHover}
+    100% {box-shadow: 0 0 0 $charHover}
+}
