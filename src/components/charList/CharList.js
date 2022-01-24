@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Characters from './Characters'
 import Spinner from '../spinner/Spinner';
 import MarvelService from '../../services/MarvelService';
@@ -6,79 +6,71 @@ import PropTypes from 'prop-types';
 
 import './charList.scss';
 
-class CharList extends Component {
-    state = {
-        characters: [],
-        loading: true,
-        error: false,
-        newItemLoading: false, 
-        offset: 210,
-        charEnded: false
+const CharList = (props) => {
+
+    const [characters, setCharacters] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState(false)
+    const [newItemLoading, setNewItemLoading] = useState(false)
+    const [offset, setOffset] = useState(210)
+    const [charEnded, setCharEnded] = useState(false)
+
+    const marvelService = new MarvelService();
+
+    useEffect(() => {
+        getAllCharacters()
+    }, [])
+
+    const onError = () => {
+        setLoading(() => false);
+        setError(true)
     }
 
-    marvelService = new MarvelService();
-
-    onError = () => {
-        this.setState({
-            loading: false,
-            error: true
-        })
-    }
-
-    onCharactersLoaded = (newCharacters) => {
+    const onCharactersLoaded = (newCharacters) => {
         let ended = false;
         if (newCharacters.length < 9) {
             ended = true
         }
 
-        this.setState(({offset, characters}) => ({
-            characters: [...characters, ...newCharacters],
-            loading: false,
-            newItemLoading: false,
-            offset: offset + 9,
-            charEnded: ended
-        }))
+        setCharacters(characters => [...characters, ...newCharacters])
+        setLoading(() => false)
+        setNewItemLoading(() => false)
+        setOffset(offset => offset + 9)
+        setCharEnded(() => ended)
     }
 
-    getAllCharacters = (offset) => {
-        this.onCharactersLoading();
-        this.marvelService
+    const onCharactersLoading = () => {
+        setNewItemLoading(true)
+    }
+
+    const getAllCharacters = (offset) => {
+        onCharactersLoading();
+        marvelService
             .getAllCharacters(offset)
-            .then(this.onCharactersLoaded)
-            .catch(this.onError)
+            .then(onCharactersLoaded)
+            .catch(onError)
     }
 
-    onCharactersLoading = () => {
-        this.setState({
-            newItemLoading: true
-        })
-    }
 
-    componentDidMount() {
-        this.getAllCharacters();
-    }
 
-    render() {
-        const {characters, loading, error, offset, newItemLoading, charEnded} = this.state;
-        const errorMessage = error ? "Sorry, error :(" : null;
-        const spinner = loading ? <Spinner /> : null;
-        const content = !(loading || error) ? <Characters onCharacterSelected={this.props.onCharacterSelected} characters={characters}/> : null;
+    const errorMessage = error ? "Sorry, error :(" : null;
+    const spinner = loading ? <Spinner /> : null;
+    const content = !(loading || error) ? <Characters onCharacterSelected={props.onCharacterSelected} characters={characters}/> : null;
 
-        return (
-            <div className="char__list">
-                    {errorMessage}
-                    {spinner}
-                    {content}
-                <button 
-                    className="button button__main button__long"
-                    disabled={newItemLoading}
-                    style={{'display': charEnded ? 'none' : 'block'}}
-                    onClick={() => this.getAllCharacters(offset)}>
-                    <div className="inner">load more</div>
-                </button>
-            </div>
-        )
-    }
+    return (
+        <div className="char__list">
+                {errorMessage}
+                {spinner}
+                {content}
+            <button 
+                className="button button__main button__long"
+                disabled={newItemLoading}
+                style={{'display': charEnded ? 'none' : 'block'}}
+                onClick={() => getAllCharacters(offset)}>
+                <div className="inner">load more</div>
+            </button>
+        </div>
+    )
 }
 
 CharList.propTypes = {                                                        // https://ru.reactjs.org/docs/typechecking-with-proptypes.html
