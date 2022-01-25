@@ -1,41 +1,36 @@
-import { Component } from 'react';
+import { useRef } from 'react';
 import PropTypes from 'prop-types';
 
-class Characters extends Component {
-    charRefs = [];
+const Characters = (props) => {
+    const charRefs = useRef([]);
 
-    setRef = elem => {
-        this.charRefs.push(elem)
-    }
-
-    onCharacterFocus = (id) => {
-        this.charRefs.forEach(item => item.classList.remove('char__item_selected'))
-        this.charRefs[id].classList.add('char__item_selected')
-        this.charRefs[id].focus()
+    const onCharacterFocus = (id) => {
+        charRefs.current.forEach(item => item.classList.remove('char__item_selected'))
+        charRefs.current[id].classList.add('char__item_selected')
+        charRefs.current[id].focus()
     }
 
 
-    render() {
-        const {characters, onCharacterSelected} = this.props;
+        const {characters, onCharacterSelected} = props;
 
         const checkThumbnail = (item) => {
             return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {objectFit: 'initial'} : {objectFit: 'cover'};
         }
 
-        const everyChar= characters.map((item, i) => {
+        const everyChar = characters.map((item, i) => {
 
             return (
                 <li
-                    ref={this.setRef}
+                    ref={el => charRefs.current[i] = el} //массив ссылок на DOM элемент
                     tabIndex={0}
                     className="char__item"
                     key={item.id}
                     onClick={() => {onCharacterSelected(item.id);
-                                    this.onCharacterFocus(i)}}
+                                    onCharacterFocus(i)}}
                     onKeyPress={(el) => {
                         if (el.key === ' ' || el.key === 'Enter') {
                             onCharacterSelected(item.id);
-                            this.onCharacterFocus(i)
+                            onCharacterFocus(i)
                         }
                     }}
                 >
@@ -51,7 +46,6 @@ class Characters extends Component {
               {everyChar}
             </ul>
         )
-    }
 }
 
 Characters.propTypes = {
@@ -59,9 +53,3 @@ Characters.propTypes = {
 }
 
 export default Characters;
-
-
-// <li className="char__item char__item_selected">
-// <img src={abyss} alt="abyss"/>
-// <div className="char__name">Abyss</div>
-// </li>
