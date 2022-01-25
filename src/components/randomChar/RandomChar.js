@@ -40,17 +40,10 @@ const RandomChar = () => {
     }
 
     useEffect(() => {
-        updateCharacter()
+        updateCharacter();
+        // const timerId = setInterval(updateCharacter, 4000);
+        // return () => {clearInterval(timerId)}
     }, [])
-
-    // componentDidMount() {
-    //     this.updateCharacter();
-    //     // this.timerId = setInterval(this.updateCharacter, 4000);
-    // }
-
-    // componentWillUnmount() {
-    //     clearInterval(this.timerId)
-    // }
 
     const errorMessage = error ? <ErrorMessage /> : null;
     const spinner = loading ? <Spinner /> : null;
