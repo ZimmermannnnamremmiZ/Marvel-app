@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
 import AppHeader from "../appHeader/AppHeader";
 import AppBanner  from '../appBanner/AppBanner';
 import RandomChar from "../randomChar/RandomChar";
@@ -24,26 +25,34 @@ const App = () => {
     }
 
     return (
-        <div className="app">
-            <AppHeader/>
-            <main>
-                <AppBanner />
-                <ComicsList onComicsSelected={onComicsSelected}/>
-                <SingleComic comicId={selectedComics}/>
-                {/* <ErrorBoundary>
-                    <RandomChar/>
-                </ErrorBoundary>
-                <div className="char__content">
-                    <ErrorBoundary>
-                        <CharList onCharacterSelected={onCharacterSelected} />
-                    </ErrorBoundary>
-                    <ErrorBoundary>
-                        <CharInfo characterId={selectedCharacter}/>
-                    </ErrorBoundary>
-                </div>
-                <img className="bg-decoration" src={decoration} alt="vision"/> */}
-            </main>
-        </div>
+        <Router>
+            <div className="app">
+                <AppHeader/>
+                <main>
+                    <AppBanner />
+                    <ComicsList onComicsSelected={onComicsSelected}/>
+                    {/* <SingleComic comicId={selectedComics}/> */}
+                    <Route>
+                        <ErrorBoundary>
+                            <RandomChar/>
+                        </ErrorBoundary>
+                        <div className="char__content">
+                            <ErrorBoundary>
+                                <CharList onCharacterSelected={onCharacterSelected} />
+                            </ErrorBoundary>
+                            <ErrorBoundary>
+                                <CharInfo characterId={selectedCharacter}/>
+                            </ErrorBoundary>
+                        </div>
+                        <img className="bg-decoration" src={decoration} alt="vision"/>
+                    </Route>
+                    <Route>
+                        <AppBanner />
+                        <ComicsList onComicsSelected={onComicsSelected}/>
+                    </Route>
+                </main>
+            </div>
+        </Router>
     )
 }
 
