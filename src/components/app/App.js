@@ -22,14 +22,14 @@ const App = () => {
                 <ErrorBoundary>
                     <RandomChar/>
                 </ErrorBoundary>
-                {/* <div className="char__content">
+                <div className="char__content">
                     <ErrorBoundary>
                         <CharList onCharacterSelected={onCharacterSelected} />
                     </ErrorBoundary>
                     <ErrorBoundary>
                         <CharInfo characterId={selectedCharacter}/>
                     </ErrorBoundary>
-                </div> */}
+                </div>
                 <img className="bg-decoration" src={decoration} alt="vision"/>
             </main>
         </div>
