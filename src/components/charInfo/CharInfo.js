@@ -3,62 +3,33 @@ import { useState, useEffect } from 'react';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Skeleton from '../skeleton/Skeleton'
-import MarvelService from '../../services/MarvelService';
+import useMarvelService from '../../services/MarvelService';
 
 import './charInfo.scss';
 
 const  CharInfo = (props) => {
 
     const [character, setCharacter] = useState(null)
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(false)
-
-    
-
+    const {loading, error, getCharacter, clearError} = useMarvelService();
 
     useEffect(() => {
-        const marvelService = new MarvelService();
         const updateCharacter = () => {
         if (!props.characterId) {
             return;
-        }
-
-        onCharacterLoading()
-        marvelService
-            .getCharacter(props.characterId)
+        };
+        clearError();
+        getCharacter(props.characterId)
             .then(onCharacterLoaded)
-            .catch(onError)
         }
     updateCharacter()
     }, [props.characterId])
-    // function componentDidMount() {
-    //     updateCharacter();
-    // }
-
-    // function componentDidUpdate(prevProps, prevState) {
-    //     if (props.characterId !== prevProps.characterId) {
-    //         updateCharacter();
-    //     }
-    // }
-
-
-
-    const onError = () => {
-        setLoading(false)
-        setError(true)
-    }
-
-    const onCharacterLoading = () => {
-        setLoading(true)
-    }
 
     const onCharacterLoaded = (character) => {
         setCharacter(character)
-        setLoading(false)
     }
 
 
-        const skeleton = character || loading || error ? null : <Skeleton />
+        const skeleton = character || loading || error ? null : <Skeleton />;
         const errorMessage = error ? <ErrorMessage /> : null;
         const spinner = loading ? <Spinner /> : null;
         const content = !(loading || error || !character) ? <View character={character}/> : null;
