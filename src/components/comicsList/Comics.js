@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const Comics = (props) => {
@@ -32,11 +33,11 @@ const Comics = (props) => {
                         }
                     }}
                 >
-                    <a href={item.homepage}>
+                    <Link to={`/comics/${item.id}`} href={item.homepage}>
                         <img style={checkThumbnail(item.thumbnail)} src={item.thumbnail} alt={item.name} className="comics__item-img"/>
                         <div className="comics__item-name">{item.name}</div>
                         <div className="comics__item-price">{item.price}</div>
-                    </a>
+                    </Link>
                 </li>
         )
     })
