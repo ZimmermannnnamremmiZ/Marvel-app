@@ -29,7 +29,7 @@
             transform: translate(-15px, -15px);
         }
         &_selected {
-            box-shadow: $charHover;
+            box-shadow: $itemHover;
             transform: translateY(-8px);
             @include shadow
         }
