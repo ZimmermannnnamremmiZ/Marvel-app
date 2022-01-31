@@ -29,12 +29,12 @@ const useMarvelService = () => {
     const _transformComics = (comics) => {
         return {
             id: comics.id,
-            name: comics.title,
+            title: comics.title,
             homepage: comics.urls[0].url,
             price: comics.prices[0].price ? comics.prices[0].price + '$' : 'Not available',
             thumbnail: comics.thumbnail.path + '.' + comics.thumbnail.extension,
             description: comics.description ? comics.description : 'No description',
-            pageCount: comics.pageCount,
+            pageCount: !comics.pageCount || 0 ? 'No information about page count' : comics.pageCount,
             language: comics.textObjects.language || 'en-us'
         }
     }

@@ -56,7 +56,7 @@ const View = (props) => {
             <div className="char__basics">
                 <img style={checkThumbnail()} src={thumbnail} alt={name}/>
                 <div>
-                    <div className="char__info-name">thor</div>
+                    <div className="char__info-name">{name}</div>
                     <div className="char__btns">
                         <a href={homepage} className="button button__main">
                             <div className="inner">homepage</div>

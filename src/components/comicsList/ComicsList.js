@@ -6,9 +6,7 @@ import useMarvelService from '../../services/MarvelService';
 
 import './comicsList.scss';
 
-const ComicsList = (props) => {
-
-
+const ComicsList = () => {
     const [comics, setComics] = useState([])
     const [newItemLoading, setNewItemLoading] = useState(false)
     const [offset, setOffset] = useState(10)
@@ -45,7 +43,7 @@ const ComicsList = (props) => {
         <div className="comics__list">
             {errorMessage}
             {spinner}
-            <Comics  onComicsSelected={props.onComicsSelected} comics={comics} />
+            <Comics comics={comics} />
             <button className="button button__main button__long"
                     disabled={newItemLoading}
                     style={{'display': comicsEnded ? 'none' : 'block'}}

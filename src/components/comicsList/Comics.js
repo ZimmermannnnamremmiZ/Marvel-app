@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 const Comics = (props) => {
     const ComicsRefs = useRef([]);
@@ -11,7 +10,7 @@ const Comics = (props) => {
         ComicsRefs.current[id].focus()
     }
 
-    const {comics, onComicsSelected} = props;
+    const {comics} = props;
 
     const checkThumbnail = (item) => {
         return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {objectFit: 'initial'} : {objectFit: 'cover'};
@@ -24,18 +23,14 @@ const Comics = (props) => {
                     tabIndex={0}
                     className="comics__item"
                     key={item.id}
-                    onClick={() => {onComicsSelected(item.id);
-                                    onComicsFocus(i)}}
+                    onClick={() => {onComicsFocus(i)}}
                     onKeyPress={(el) => {
-                        if (el.key === ' ' || el.key === 'Enter') {
-                            onComicsSelected(item.id);
-                            onComicsFocus(i)
-                        }
+                        if (el.key === ' ' || el.key === 'Enter') {onComicsFocus(i)}
                     }}
                 >
                     <Link to={`/comics/${item.id}`} href={item.homepage}>
-                        <img style={checkThumbnail(item.thumbnail)} src={item.thumbnail} alt={item.name} className="comics__item-img"/>
-                        <div className="comics__item-name">{item.name}</div>
+                        <img style={checkThumbnail(item.thumbnail)} src={item.thumbnail} alt={item.title} className="comics__item-img"/>
+                        <div className="comics__item-name">{item.title}</div>
                         <div className="comics__item-price">{item.price}</div>
                     </Link>
                 </li>
@@ -47,10 +42,6 @@ const Comics = (props) => {
             {everyComics}
         </ul>
     )
-}
-
-Comics.propTypes = {
-    onComicsSelected: PropTypes.func.isRequired
 }
 
 export default Comics;

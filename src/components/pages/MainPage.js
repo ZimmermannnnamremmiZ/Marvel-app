@@ -19,12 +19,12 @@ import decoration from '../../resources/img/vision.png';
                     <RandomChar/>
                 </ErrorBoundary>
                 <div className="char__content">
-                <ErrorBoundary>
-                    <CharList onCharacterSelected={onCharacterSelected} />
-                </ErrorBoundary>
-                <ErrorBoundary>
-                    <CharInfo characterId={selectedCharacter}/>
-                </ErrorBoundary>
+                    <ErrorBoundary>
+                        <CharList onCharacterSelected={onCharacterSelected} />
+                    </ErrorBoundary>
+                    <ErrorBoundary>
+                        <CharInfo characterId={selectedCharacter}/>
+                    </ErrorBoundary>
                 </div>
                 <img className="bg-decoration" src={decoration} alt="vision"/>
             </>
