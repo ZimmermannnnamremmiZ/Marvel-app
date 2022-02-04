@@ -43,7 +43,7 @@ const useMarvelService = () => {
         return {
             id: character.id,
             name: character.name,
-            description: character.description ? character.description.length > 190 ? `${character.description.substring(0, 190)} ...`: character.description : character.description = 'No description for this character',
+            description: character.description ? character.description.length > 175 ? `${character.description.substring(0, 175)} ...`: character.description : character.description = 'No description for this character',
             thumbnail: character.thumbnail.path + '.' + character.thumbnail.extension,
             homepage: character.urls[0].url,
             wiki: character.urls[1].url,
