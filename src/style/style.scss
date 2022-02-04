@@ -61,7 +61,7 @@ input::-webkit-inner-spin-button {
         @include respond-to(1450px) {right: -103px}
         @include respond-to(1300px) {right: -40px; width: 36%}
     }
-
+    @include respond-to(1240px) {width: 1000px}
 }
 
 main {

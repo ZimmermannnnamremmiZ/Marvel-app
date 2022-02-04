@@ -4,13 +4,10 @@ $grey: #5C5C5C;
 $itemHover: #6b003e;
 
 @mixin shadow {
-    animation: flickerShadow 2s ease-in-out infinite;;
+    animation: flickerShadow 1s ease-in-out infinite alternate;
 }
 
 @keyframes flickerShadow {
     0% {box-shadow: 0 0 0 $itemHover}
-    25% {box-shadow: 0 0 20px $itemHover}
-    50% {box-shadow: 0 0 40px $itemHover}
-    75% {box-shadow: 0 0 20px $itemHover}
-    100% {box-shadow: 0 0 0 $itemHover}
+    100% {box-shadow: 0 0 40px $itemHover}
 }

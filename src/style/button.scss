@@ -1,7 +1,9 @@
 @import './variables';
+@import './adaptive.scss';
 
 .button {
     min-width: 101px;
+    @include respond-to(1240px) {min-width: 85px}
     color: #fff;
     text-align: center;
     text-transform: uppercase;
@@ -10,6 +12,8 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+
+    @include respond-to(1240px) {padding: 0;}
     &__long {
         display: block;
         width: 170px;
@@ -20,6 +24,7 @@
         background-color: $main-color;
         line-height: 18px;
         padding: 0 18px;
+        @include respond-to(1240px) {padding: 0}
         transition: none;
         &::before {
             border-color: $main-color transparent;
