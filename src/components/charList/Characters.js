@@ -11,41 +11,41 @@ const Characters = (props) => {
     }
 
 
-        const {characters, onCharacterSelected} = props;
+    const {characters, onCharacterSelected} = props;
 
-        const checkThumbnail = (item) => {
-            return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {objectFit: 'initial'} : {objectFit: 'cover'};
-        }
+    const checkThumbnail = (item) => {
+        return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {objectFit: 'initial'} : {objectFit: 'cover'};
+    }
 
-        const everyChar = characters.map((item, i) => {
-
-            return (
-                <li
-                    ref={el => charRefs.current[i] = el} //массив ссылок на DOM элемент
-                    tabIndex={0}
-                    className="char__item"
-                    key={item.id}
-                    onClick={() => {onCharacterSelected(item.id);
-                                    onCharacterFocus(i)}}
-                    onKeyPress={(el) => {
-                        if (el.key === ' ' || el.key === 'Enter') {
-                            onCharacterSelected(item.id);
-                            onCharacterFocus(i)
-                        }
-                    }}
-                >
-                    <img style={checkThumbnail(item.thumbnail)} src={item.thumbnail} alt={item.name}/>
-                    <div className="char__name">{item.name}</div>
-                </li>
-            )
-        })
-
+    const everyChar = characters.map((item, i) => {
 
         return (
-            <ul className="char__grid">
-              {everyChar}
-            </ul>
+            <li
+                ref={el => charRefs.current[i] = el} //массив ссылок на DOM элемент
+                tabIndex={0}
+                className="char__item"
+                key={item.id}
+                onClick={() => {onCharacterSelected(item.id);
+                                onCharacterFocus(i)}}
+                onKeyPress={(el) => {
+                    if (el.key === ' ' || el.key === 'Enter') {
+                        onCharacterSelected(item.id);
+                        onCharacterFocus(i)
+                    }
+                }}
+            >
+                <img style={checkThumbnail(item.thumbnail)} src={item.thumbnail} alt={item.name}/>
+                <div className="char__name">{item.name}</div>
+            </li>
         )
+    })
+
+
+    return (
+        <ul className="char__grid">
+            {everyChar}
+        </ul>
+    )
 }
 
 Characters.propTypes = {
