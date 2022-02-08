@@ -63,7 +63,7 @@
                 transition: none;
             }
             &::after {
-                border-color: $grey transparent; 
+                border-color: $grey transparent;
                 transition: none;
             }
         }
@@ -94,6 +94,7 @@
         transform: translateY(-5px);
     }
     &:disabled {
-        filter: grayscale(.5);
+        -webkit-filter: grayscale(.5);
+                filter: grayscale(.5);
     }
 }

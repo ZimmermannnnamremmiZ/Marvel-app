@@ -35,7 +35,6 @@ const  CharInfo = (props) => {
 
     const onClose = () => {
         setDisplay({display: "none"})
-        console.log('close')
     }
 
         const skeleton = character || maxW1090px || loading || error ? null : <Skeleton />;
@@ -55,7 +54,7 @@ const  CharInfo = (props) => {
 
 const View = (props) => {
     const {name, description, thumbnail, homepage, wiki, comics} = props.character;
-    
+
     const checkThumbnail = () => {
         return thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {objectFit: 'initial'} : {objectFit: 'cover'};
     }

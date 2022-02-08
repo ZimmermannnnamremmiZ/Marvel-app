@@ -5,102 +5,133 @@
     &__info {
         @include respond-to(1090px) {
             display: none;
-            width: 100%
+            width: 870px;
         }
+
         padding: 25px;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
         position: relative;
-        @include respond-to(1090px) {position: absolute}
+
+        @include respond-to(1090px) {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            margin-left: -435px;
+        }
+
         z-index: 5;
         background-color: #fff;
+
         &-name {
             font-weight: bold;
             font-size: 22px;
-            @include respond-to(1240px) {font-size: 20px}
+
+            @include respond-to(1240px) {
+                font-size: 20px
+            }
+
             line-height: 29px;
             text-transform: uppercase;
         }
+
         .skeleton {
             margin-top: 30px;
         }
     }
+
     &__closeButton {
-            display: none;
-            @include respond-to(1090px) {display: block}
-            margin-left: auto;
-            position: relative;
-            float:left;
-            width: 35px;	
-			height: 35px;
-			background-image: -webkit-linear-gradient(top, #f4f1ee, #fff);
-			background-image: linear-gradient(top, #f4f1ee, #fff);
-			border-radius: 50%;
-			box-shadow: 0px 8px 10px 0px rgba(0, 0, 0, .3), inset 0px 4px 1px 1px white, inset 0px -3px 1px 1px rgba(204,198,197,.5);		
-			-webkit-transition: all .1s linear;
-			transition: all .1s linear;
-            &:after{
-                content: "✖";
-                position: absolute;
-                width: 30px;
-                left: 1px;
-                top: 5px;
-                color:#e9e6e4;
-                display: block;
-                font-size: 18px;
-                height: 30px;
-                text-decoration: none;
-                text-shadow: 0px -1px 1px #bdb5b4, 1px 1px 1px white;
-            }
-            &:hover {
-                background-image: -webkit-linear-gradient(top, #fff, #f4f1ee);
-                background-image: linear-gradient(top, #fff, #f4f1ee);
-                color:#0088cc;
-            }
-            &:hover::after {
-                color:#f94e66;
-                text-shadow:0px 0px 6px #f94e66;
-            }
-            &:active {
-                background-image: -webkit-linear-gradient(top, #efedec, #f7f4f4);
-                background-image: linear-gradient(top, #efedec, #f7f4f4);
-                box-shadow: 0 3px 5px 0 rgba(0,0,0,.4), inset 0px -3px 1px 1px rgba(204,198,197,.5);
-            }
-            &:active:after{
-                color:#dbd2d2;
-                text-shadow: 0px -1px 1px #bdb5b4, 0px 1px 1px white;
-            }
-	}
+        display: none;
+
+        @include respond-to(1090px) {
+            display: block
+        }
+
+        margin-left: auto;
+        position: relative;
+        float:left;
+        width: 35px;
+        height: 35px;
+        background-image: linear-gradient(to top, #f4f1ee, #fff);
+        border: solid 2px #a5a5a5;
+        border-radius: 50%;
+        transition: all .1s linear;
+
+        &:after {
+            content: "✖";
+            position: absolute;
+            width: 30px;
+            left: 1px;
+            top: 3.3px;
+            color: #e9e6e4;
+            display: block;
+            font-size: 18px;
+            height: 30px;
+            text-decoration: none;
+            text-shadow: 0px -1px 1px #bdb5b4, 1px 1px 1px white;
+        }
+
+        &:hover {
+            background-image: linear-gradient(to top, #fff, #f4f1ee);
+            color: #0088cc;
+        }
+
+        &:hover::after {
+            color: #f94e66;
+            text-shadow: 0px 0px 6px #f94e66;
+        }
+    }
+
     &__basics {
         display: grid;
         grid-template-columns: 150px auto;
-        @include respond-to(1090px) {grid-template-columns: 150px auto 40px;}
+
+        @include respond-to(1090px) {
+            grid-template-columns: 150px auto 40px;
+        }
+
+        -moz-column-gap: 25px;
         column-gap: 25px;
+
         img {
             width: 150px;
             height: 150px;
+            -o-object-fit: cover;
             object-fit: cover;
         }
     }
+
     &__btns {
         margin-top: 35px;
+
         a:nth-child(2) {
             margin-top: 10px;
         }
     }
+
     &__descr {
         margin-top: 15px;
         font-size: 14px;
         line-height: 18px;
     }
+
     &__comics {
         font-weight: bold;
         font-size: 18px;
         line-height: 24px;
         margin-top: 10px;
+
         &-list {
             position: relative;
             margin-top: 10px;
+
+            @include respond-to(1090px) {
+                display: grid;
+                grid-template-columns: 49% 49%;
+                grid-gap: 2%;
+                grid-row-gap: 0;
+            }
         }
+
         &-item {
             width: 100%;
             padding: 0px 10px;
@@ -109,6 +140,7 @@
             margin-top: 10px;
         }
     }
+
     &__select {
         font-weight: bold;
         font-size: 18px;
