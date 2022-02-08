@@ -8,7 +8,6 @@ import PropTypes from 'prop-types';
 import './charList.scss';
 
 const CharList = (props) => {
-
     const [characters, setCharacters] = useState([])
     const [newItemLoading, setNewItemLoading] = useState(false)
     const [offset, setOffset] = useState(210)
@@ -40,7 +39,7 @@ const CharList = (props) => {
 
     const errorMessage = error ? <ErrorMessage /> : null;
     const spinner = loading && !newItemLoading ? <Spinner /> : null;
-
+  
     return (
         <div className="char__list">
                 {errorMessage}

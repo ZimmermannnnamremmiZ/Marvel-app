@@ -12,7 +12,7 @@ const  CharInfo = (props) => {
 
     const [character, setCharacter] = useState(null)
     const [display, setDisplay] = useState()
-
+    
     const {loading, error, getCharacter, clearError} = useMarvelService();
     const maxW1090px = useMediaQuery({ query: '(max-width: 1090px)' })
 
