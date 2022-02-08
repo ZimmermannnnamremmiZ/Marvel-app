@@ -50,22 +50,25 @@ input::-webkit-inner-spin-button {
 
 .app {
     width: 1100px;
+    @include respond-to(1240px) {width: 1000px}
+    @include respond-to(1090px) {width: 850px}
     margin: 0 auto;
     padding: 50px 0;
     position: relative;
     .bg-decoration {
         position: absolute;
         right: -174px;
-        bottom: -70px;
-        z-index: -1;
         @include respond-to(1450px) {right: -103px}
         @include respond-to(1300px) {right: -40px; width: 36%}
+        bottom: -70px;
+        z-index: -1;
+        @include respond-to(1090px) {display: none}
     }
-    @include respond-to(1240px) {width: 1000px}
 }
 
 main {
     margin-top: 50px;
+    @include respond-to(1090px) {margin-top: 30px}
     position: relative;
 }
 

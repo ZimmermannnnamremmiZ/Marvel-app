@@ -1,8 +1,10 @@
 @import '../../style/variables.scss';
+@import '../../style/adaptive.scss';
 
 .randomchar {
     display: grid;
     grid-template-columns: repeat(2, 50%);
+    @include respond-to(1090px) {grid-template-columns: 60% 40%}
     align-items: center;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
     &__block {
@@ -25,6 +27,7 @@
     &__name {
         font-weight: bold;
         font-size: 22px;
+        @include respond-to(1240px) {font-size: 19px}
         line-height: 29px;
         text-transform: uppercase;
     }
@@ -48,6 +51,8 @@
     &__title {
         font-weight: bold;
         font-size: 24px;
+        @include respond-to(1240px) {font-size: 22px}
+        @include respond-to(1090px) {font-size: 19px}
         line-height: 32px;
         letter-spacing: -0.045em;
         color: #FFFFFF;
@@ -58,6 +63,8 @@
     &__decoration {
         position: absolute;
         bottom: 14px;
+        @include respond-to(1090px) {bottom: 10px}
         right: -37px;
+        @include respond-to(1090px) {width: 165px}
     }
 }

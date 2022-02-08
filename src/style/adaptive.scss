@@ -8,6 +8,9 @@
     @else if $media == tablets {
       @media only screen and (max-width: 959px) { @content; }
     }
+    @else if $media == 1090px {
+      @media only screen and (max-width: 1090px) { @content; }
+    }
     @else if $media == 1240px {
         @media only screen and (max-width: 1240px) { @content; }
     }
