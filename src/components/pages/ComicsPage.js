@@ -1,4 +1,3 @@
-import { useState } from "react";
 import AppBanner  from '../appBanner/AppBanner';
 import ComicsList from '../comicsList/ComicsList';
 

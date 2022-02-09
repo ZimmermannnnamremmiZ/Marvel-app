@@ -19,6 +19,21 @@
             margin-left: -435px;
         }
 
+        @include respond-to(900px) {
+            width: 770px;
+            margin-left: -385px;
+        }
+
+        @include respond-to(790px) {
+            width: 720px;
+            margin-left: -360px;
+        }
+
+        @include respond-to(790px) {
+            width: 98%;
+            margin-left: -49%;
+        }
+
         z-index: 5;
         background-color: #fff;
 
@@ -105,6 +120,10 @@
 
         a:nth-child(2) {
             margin-top: 10px;
+
+            @include respond-to(1090px) {
+                margin-left: 20px;
+            }
         }
     }
 
@@ -138,6 +157,7 @@
             line-height: 25px;
             box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
             margin-top: 10px;
+            @include respond-to(790px) {font-size: 14px;}
         }
     }
 

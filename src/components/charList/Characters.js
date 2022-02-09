@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import PropTypes from 'prop-types';
+import { v4 as uuidv4 } from 'uuid';
 
 const Characters = (props) => {
     const charRefs = useRef([]);
@@ -24,7 +25,7 @@ const Characters = (props) => {
                 ref={el => charRefs.current[i] = el} //массив ссылок на DOM элемент
                 tabIndex={0}
                 className="char__item"
-                key={item.id}
+                key={uuidv4()}
                 onClick={() => {onCharacterSelected(item.id);
                                 onCharacterFocus(i)}}
                 onKeyPress={(el) => {

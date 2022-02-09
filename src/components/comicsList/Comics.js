@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid';
 
 const Comics = (props) => {
     const ComicsRefs = useRef([]);
@@ -22,7 +23,7 @@ const Comics = (props) => {
                     ref={el => ComicsRefs.current[i] = el}   //массив ссылок на DOM элемент
                     tabIndex={0}
                     className="comics__item"
-                    key={item.id}
+                    key={uuidv4()}
                     onClick={() => {onComicsFocus(i)}}
                     onKeyPress={(el) => {
                         if (el.key === ' ' || el.key === 'Enter') {onComicsFocus(i)}
