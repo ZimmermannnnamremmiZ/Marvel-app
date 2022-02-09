@@ -12,6 +12,7 @@
     align-items: center;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
 
+
     &__block {
         max-height: 260px;
         @include respond-to(900px) {max-height: none}
@@ -55,7 +56,7 @@
                 margin-right: 20px;
             }
         }
-        
+
     }
 
     &__static {
@@ -90,7 +91,7 @@
             font-size: 22px
         }
 
-        
+
 
         line-height: 32px;
         letter-spacing: -0.045em;
@@ -114,7 +115,10 @@
         @include respond-to(1090px) {bottom: 10px}
         @include respond-to(900px) {bottom: 45px}
         right: -10px;
-        @include respond-to(740px) {right: 0}
-        
+        @include respond-to(740px) {
+            right: 0;
+            object-position: 24px 0;
+        }
+
     }
 }

@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
+
 
 const Comics = (props) => {
     const ComicsRefs = useRef([]);
@@ -14,7 +14,9 @@ const Comics = (props) => {
     const {comics} = props;
 
     const checkThumbnail = (item) => {
-        return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {objectFit: 'initial'} : {objectFit: 'cover'};
+        return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {
+            objectFit: "cover", objectPosition: "0"
+        } : {objectFit: 'cover'};
     }
 
     const everyComics = comics.map((item, i) => {
@@ -23,7 +25,7 @@ const Comics = (props) => {
                     ref={el => ComicsRefs.current[i] = el}   //массив ссылок на DOM элемент
                     tabIndex={0}
                     className="comics__item"
-                    key={uuidv4()}
+                    key={item.id}
                     onClick={() => {onComicsFocus(i)}}
                     onKeyPress={(el) => {
                         if (el.key === ' ' || el.key === 'Enter') {onComicsFocus(i)}

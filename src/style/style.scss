@@ -48,10 +48,12 @@ input::-webkit-inner-spin-button {
     @include respond-to(1090px) {width: 850px}
     @include respond-to(900px) {width: 750px}
     @include respond-to(790px) {width: 680px}
-    @include respond-to(740px) {width: 98%}
-    
+    @include respond-to(740px) {width: 96%}
+
     margin: 0 auto;
     padding: 50px 0;
+    @include respond-to(740px) {padding: 15px 0;}
+
     position: relative;
 
     .bg-decoration {
