@@ -2,11 +2,17 @@
     @if $media == handhelds {
       @media only screen and (max-width: 479px) { @content; }
     }
-    @else if $media == wide-handhelds {
-      @media only screen and (max-width: 767px) { @content; }
+    @else if $media == 740px {
+      @media only screen and (max-width: 740px) { @content; }
     }
-    @else if $media == tablets {
-      @media only screen and (max-width: 959px) { @content; }
+    @else if $media == 790px {
+      @media only screen and (max-width: 790px) { @content; }
+    }
+    @else if $media == 900px {
+      @media only screen and (max-width: 900px) { @content; }
+    }
+    @else if $media == 960px {
+      @media only screen and (max-width: 960px) { @content; }
     }
     @else if $media == 1090px {
       @media only screen and (max-width: 1090px) { @content; }

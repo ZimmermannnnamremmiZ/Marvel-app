@@ -11,7 +11,7 @@ import './charInfo.scss';
 const  CharInfo = (props) => {
 
     const [character, setCharacter] = useState(null)
-    const [display, setDisplay] = useState()
+    const [visibility, setVisibility] = useState()
     
     const {loading, error, getCharacter, clearError} = useMarvelService();
     const maxW1090px = useMediaQuery({ query: '(max-width: 1090px)' })
@@ -24,7 +24,7 @@ const  CharInfo = (props) => {
             clearError();
             getCharacter(props.characterId)
                 .then(onCharacterLoaded)
-                .then(setDisplay({display: "block"}))
+                .then(setVisibility({display: "block"}))
         }
     updateCharacter()
     }, [props.characterId])
@@ -34,7 +34,7 @@ const  CharInfo = (props) => {
     }
 
     const onClose = () => {
-        setDisplay({display: "none"})
+        setVisibility({display: "none"})
     }
 
         const skeleton = character || maxW1090px || loading || error ? null : <Skeleton />;
@@ -43,7 +43,7 @@ const  CharInfo = (props) => {
         const content = !(loading || error || !character) ? <View onClose={onClose} character={character}/> : null;
 
         return (
-            <div className="char__info" style={display}>
+            <div className="char__info" style={visibility}>
                 {skeleton}
                 {errorMessage}
                 {spinner}
@@ -54,10 +54,31 @@ const  CharInfo = (props) => {
 
 const View = (props) => {
     const {name, description, thumbnail, homepage, wiki, comics} = props.character;
+    const maxW1090px = useMediaQuery({ query: '(max-width: 1090px)' })
 
     const checkThumbnail = () => {
         return thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {objectFit: 'initial'} : {objectFit: 'cover'};
     }
+
+    const valOfComics = () => {
+         if (maxW1090px) {return comics.map((item, i) => {
+            return (
+                <li className="char__comics-item" key={i}>
+                    {item.name}
+                </li>
+            )
+        })};
+        
+        return comics.map((item, i) => {
+            return  i < 9 ? (
+                <li className="char__comics-item" key={i}>
+                    {item.name}
+                </li>
+            ) : null
+        })
+    }
+        
+        
 
     return (
         <>
@@ -82,14 +103,7 @@ const View = (props) => {
             <div className="char__comics">Comics:</div>
             <ul className="char__comics-list">
                 {!comics.length ? <ErrorMessage /> : null}
-                { comics.map((item, i) => {
-                        return  (i < 9) ? (
-                            <li className="char__comics-item" key={i}>
-                                {item.name}
-                            </li>
-                        ) : null
-                    })
-                }
+                {valOfComics()}
             </ul>
         </>
     )

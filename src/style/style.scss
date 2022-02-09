@@ -10,20 +10,13 @@
     box-sizing: border-box;
 }
 
-ul,
-li,
-dl {
+ul, li, dl {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+h1, h2, h3, h4, h5, h6 {
     margin: 0;
 }
 
@@ -51,17 +44,16 @@ input::-webkit-inner-spin-button {
 
 .app {
     width: 1100px;
-
-    @include respond-to(1240px) {
-        width: 1000px
-    }
-
-    @include respond-to(1090px) {
-        width: 850px
-    }
+    @include respond-to(1240px) {width: 1000px}
+    @include respond-to(1090px) {width: 850px}
+    @include respond-to(900px) {width: 750px}
+    @include respond-to(790px) {width: 680px}
+    @include respond-to(740px) {width: 96%}
 
     margin: 0 auto;
     padding: 50px 0;
+    @include respond-to(740px) {padding: 15px 0;}
+
     position: relative;
 
     .bg-decoration {
@@ -88,10 +80,8 @@ input::-webkit-inner-spin-button {
 
 main {
     margin-top: 50px;
-
-    @include respond-to(1090px) {
-        margin-top: 30px
-    }
+    @include respond-to(1090px) {margin-top: 30px}
+    @include respond-to(790px) {margin-top: 10px}
 
     position: relative;
 }
@@ -102,29 +92,13 @@ main {
 }
 
 @-webkit-keyframes pulse {
-    0% {
-        opacity: 1
-    }
-
-    50% {
-        opacity: .4
-    }
-
-    100% {
-        opacity: 1
-    }
+    0% {opacity: 1}
+    50% {opacity: .4}
+    100% {opacity: 1}
 }
 
 @keyframes pulse {
-    0% {
-        opacity: 1
-    }
-
-    50% {
-        opacity: .4
-    }
-
-    100% {
-        opacity: 1
-    }
+    0% {opacity: 1}
+    50% {opacity: .4}
+    100% {opacity: 1}
 }

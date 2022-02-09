@@ -4,6 +4,7 @@
 .char {
     &__content {
         margin-top: 50px;
+        @include respond-to(740px) {margin-top: 40px}
         display: grid;
         grid-template-columns: 650px 425px;
 
@@ -17,36 +18,41 @@
 
         -moz-column-gap: 25px;
         column-gap: 25px;
+        @include respond-to(740px) {
+            -moz-column-gap: 0.5%;
+            column-gap: 0.5%;
+        }
         align-items: start;
     }
 
     &__grid {
         display: grid;
         grid-template-columns: repeat(3, 200px);
-
-        @include respond-to(1240px) {
-            grid-template-columns: repeat(3, 180px)
-        }
-
-        @include respond-to(1090px) {
-            grid-template-columns: repeat(3, 266.666px)
+        @include respond-to(1240px) {grid-template-columns: repeat(3, 180px)}
+        @include respond-to(1090px) {grid-template-columns: repeat(3, 266.666px)}
+        @include respond-to(900px) {grid-template-columns: repeat(3, 233.33px);}
+        @include respond-to(790px) {grid-template-columns: repeat(3, 210px);}
+        @include respond-to(740px) {
+            grid-template-columns: repeat(3, 33%);
+            width: 100%;
         }
 
         -moz-column-gap: 25px;
         column-gap: 25px;
+        @include respond-to(740px) {
+            -moz-column-gap: 0.5%;
+            column-gap: 0.5%;
+        }
         row-gap: 30px;
     }
 
     &__item {
         width: 200px;
-
-        @include respond-to(1240px) {
-            width: 180px
-        }
-
-        @include respond-to(1090px) {
-            width: 266.666px
-        }
+        @include respond-to(1240px) {width: 180px }
+        @include respond-to(1090px) {width: 266.666px}
+        @include respond-to(900px) {width: 233.33px}
+        @include respond-to(790px) {width: 210px}
+        @include respond-to(740px) {width: 100%}
 
         background-color: $dark;
         box-shadow: 5px 5px 10px rgba(0, 0, 0, .25);
@@ -57,16 +63,16 @@
         img {
             width: 200px;
             height: 200px;
-
-            @include respond-to(1240px) {
-                width: 180px;
-                height: 180px
+            @include respond-to(1240px) {width: 180px; height: 180px}
+            @include respond-to(1090px) {width: 266.666px; height: 266.666px}
+            @include respond-to(900px) {width: 233.33px; height: 233.33px}
+            @include respond-to(790px) {width: 210px; height: 210px}
+            @include respond-to(740px) {
+                width: calc(100% + 30px);
+                height: 210px
             }
 
-            @include respond-to(1090px) {
-                width: 266.666px;
-                height: 266.666px
-            }
+
 
             -o-object-fit: cover;
             object-fit: cover;
@@ -83,10 +89,8 @@
     &__name {
         font-weight: bold;
         font-size: 22px;
-
-        @include respond-to(1240px) {
-            font-size: 19px
-        }
+        @include respond-to(1240px) {font-size: 19px}
+        @include respond-to(1240px) {font-size: 17px}
 
         line-height: 29px;
         text-transform: uppercase;

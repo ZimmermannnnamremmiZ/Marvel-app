@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
+
 const Comics = (props) => {
     const ComicsRefs = useRef([]);
 
@@ -13,7 +14,9 @@ const Comics = (props) => {
     const {comics} = props;
 
     const checkThumbnail = (item) => {
-        return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {objectFit: 'initial'} : {objectFit: 'cover'};
+        return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {
+            objectFit: "cover", objectPosition: "0"
+        } : {objectFit: 'cover'};
     }
 
     const everyComics = comics.map((item, i) => {
