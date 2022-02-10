@@ -34,17 +34,22 @@
             margin-left: -49%;
         }
 
+        @include respond-to(740px) {
+            position: absolute;
+            top: 0;
+            width: 104%;
+            margin-left: -52%;
+        }
+
         z-index: 5;
         background-color: #fff;
 
         &-name {
             font-weight: bold;
             font-size: 22px;
-
-            @include respond-to(1240px) {
-                font-size: 20px
-            }
-
+            @include respond-to(1240px) {font-size: 20px}
+            @include respond-to(650px) {font-size: 19px}
+            @include respond-to(590px) {font-size: 18px}
             line-height: 29px;
             text-transform: uppercase;
         }
@@ -53,6 +58,7 @@
             margin-top: 30px;
         }
     }
+
 
     &__closeButton {
         display: none;
@@ -100,30 +106,39 @@
         display: grid;
         grid-template-columns: 150px auto;
 
-        @include respond-to(1090px) {
-            grid-template-columns: 150px auto 40px;
-        }
+        @include respond-to(1090px) {grid-template-columns: 150px auto 40px;}
 
         -moz-column-gap: 25px;
         column-gap: 25px;
+
+        &-midBox {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
         img {
             width: 150px;
             height: 150px;
             -o-object-fit: cover;
             object-fit: cover;
+            
         }
     }
 
     &__btns {
-        margin-top: 35px;
-
+        @include respond-to(1090px) {display: flex}
+        @include respond-to(500px) {flex-direction: column}
+        
         a:nth-child(2) {
-            margin-top: 10px;
+            margin-top: 5px;
+            @include respond-to(1090px) {margin-top: 0; margin-left: 10px}
+            @include respond-to(500px) {margin-top: 5px; margin-left: 0}
+        }
 
-            @include respond-to(1090px) {
-                margin-left: 20px;
-            }
+        a {
+            @include respond-to(1090px) {width: 120px}
+            @include respond-to(550px) {width: 85px}
         }
     }
 
@@ -149,6 +164,8 @@
                 grid-gap: 2%;
                 grid-row-gap: 0;
             }
+
+            @include respond-to(590px) {display: block;}
         }
 
         &-item {

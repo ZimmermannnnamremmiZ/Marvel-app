@@ -48,7 +48,7 @@ input::-webkit-inner-spin-button {
     @include respond-to(1090px) {width: 850px}
     @include respond-to(900px) {width: 750px}
     @include respond-to(790px) {width: 680px}
-    @include respond-to(740px) {width: 96%}
+    @include respond-to(740px) {width: 95%}
 
     margin: 0 auto;
     padding: 50px 0;
@@ -82,6 +82,7 @@ main {
     margin-top: 50px;
     @include respond-to(1090px) {margin-top: 30px}
     @include respond-to(790px) {margin-top: 10px}
+    @include respond-to(550px) {margin-top: 15px}
 
     position: relative;
 }

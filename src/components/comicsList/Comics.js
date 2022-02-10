@@ -15,8 +15,7 @@ const Comics = (props) => {
 
     const checkThumbnail = (item) => {
         return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {
-            objectFit: "cover", objectPosition: "0"
-        } : {objectFit: 'cover'};
+            objectFit: "cover", objectPosition: "0"} : {objectFit: 'cover'};
     }
 
     const everyComics = comics.map((item, i) => {

@@ -14,7 +14,8 @@ const Characters = (props) => {
     const {characters, onCharacterSelected} = props;
 
     const checkThumbnail = (item) => {
-        return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {objectFit: 'initial'} : {objectFit: 'cover'};
+        return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {
+            objectFit: "cover", objectPosition: "0"} : {objectFit: 'cover'};
     }
 
     const everyChar = characters.map((item, i) => {

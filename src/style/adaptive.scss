@@ -2,6 +2,18 @@
     @if $media == handhelds {
       @media only screen and (max-width: 479px) { @content; }
     }
+    @else if $media == 500px {
+      @media only screen and (max-width: 500px) { @content; }
+    }
+    @else if $media == 550px {
+      @media only screen and (max-width: 550px) { @content; }
+    }
+    @else if $media == 590px {
+      @media only screen and (max-width: 590px) { @content; }
+    }
+    @else if $media == 650px {
+      @media only screen and (max-width: 650px) { @content; }
+    }
     @else if $media == 740px {
       @media only screen and (max-width: 740px) { @content; }
     }

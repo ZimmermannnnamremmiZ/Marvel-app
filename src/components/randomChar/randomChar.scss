@@ -9,6 +9,11 @@
         grid-template-columns: auto;
         grid-template-rows: 259px 262px;
     }
+    @include respond-to(500px) {
+        grid-template-columns: auto;
+        grid-template-rows: 180px 262px;
+    }
+    
     align-items: center;
     box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);
 
@@ -17,8 +22,11 @@
         max-height: 260px;
         @include respond-to(900px) {max-height: none}
         padding: 40px 35px;
+        @include respond-to(550px) {padding: 40px 15px}
+        @include respond-to(500px) {padding: 0}
         display: grid;
         grid-template-columns: 180px auto;
+        @include respond-to(550px) {grid-template-columns: 172px auto}
         -moz-column-gap: 30px;
         column-gap: 30px;
     }
@@ -50,6 +58,12 @@
     }
 
     &__btns {
+        a {
+            @include respond-to(1240px) {min-width: 85px}
+            @include respond-to(900px) {min-width: 130px}
+            @include respond-to(590px) {min-width: 107px}
+        }
+
         a:nth-child(1) {
             margin-right: 30px;
             @include respond-to(1090px) {
@@ -66,9 +80,9 @@
 
         button {
             margin-top: 13px;
-
-            @include respond-to(960px) {
+            @include respond-to(500px) {
                 position: relative;
+                width: 130px;
                 left: 50%;
                 margin-left: -65px;
             }
@@ -78,20 +92,9 @@
     &__title {
         font-weight: bold;
         font-size: 24px;
-
-        @include respond-to(1240px) {
-            font-size: 22px
-        }
-
-        @include respond-to(1090px) {
-            font-size: 19px
-        }
-
-        @include respond-to(900px) {
-            font-size: 22px
-        }
-
-
+        @include respond-to(1240px) {font-size: 22px}
+        @include respond-to(1090px) {font-size: 19px}
+        @include respond-to(900px) {font-size: 22px}
 
         line-height: 32px;
         letter-spacing: -0.045em;
@@ -104,21 +107,19 @@
 
     &__decoration {
         @include respond-to(1090px) {width: 165px}
-        @include respond-to(960px) {display: none}
         @include respond-to(900px) {
             display: block;
             width: 200px;
         }
+        @include respond-to(500px) {display: none}
+        
 
         position: absolute;
-        bottom: 14px;
+        bottom: 25px;
+        right: 0;
+        object-position: 30px 0;
         @include respond-to(1090px) {bottom: 10px}
         @include respond-to(900px) {bottom: 45px}
-        right: -10px;
-        @include respond-to(740px) {
-            right: 0;
-            object-position: 24px 0;
-        }
-
+        @include respond-to(740px) {object-position: 24px 0}
     }
 }
