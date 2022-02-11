@@ -8,21 +8,24 @@
     }
 
     &__title {
-        font-weight: bold;
-        font-size: 28px;
 
-        @include respond-to(1240px) {
-            font-size: 24px
+        &-text {
+            font-weight: bold;
+            font-size: 28px;
+            @include respond-to(1240px) {font-size: 24px}
+            @include respond-to(900px) {font-size: 22px}
+            line-height: 37px;
+            span {color: $main-color;}
+            @include respond-to(500px) {display: none; }
         }
+        
 
-        @include respond-to(900px) {
-            font-size: 22px
-        }
-
-        line-height: 37px;
-
-        span {
-            color: $main-color;
+        &-logo {
+            display: none;
+            @include respond-to(500px) {
+                display: block;
+                width: 88px;
+            }
         }
     }
 
@@ -32,16 +35,10 @@
             justify-content: space-between;
             font-weight: bold;
             font-size: 28px;
+            @include respond-to(1240px) {font-size: 24px}
+            @include respond-to(900px) {font-size: 22px}
 
-            @include respond-to(1240px) {
-                font-size: 24px
-            }
-
-            @include respond-to(900px) {
-                font-size: 22px
-            }
-
-            line-height: 32px;
+            line-height: 37px;
 
             li {
                 margin: 0 8px;

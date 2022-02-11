@@ -34,17 +34,22 @@
             margin-left: -49%;
         }
 
+        @include respond-to(740px) {
+            position: absolute;
+            top: 0;
+            width: 104%;
+            margin-left: -52%;
+        }
+
         z-index: 5;
         background-color: #fff;
 
         &-name {
             font-weight: bold;
             font-size: 22px;
-
-            @include respond-to(1240px) {
-                font-size: 20px
-            }
-
+            @include respond-to(1240px) {font-size: 20px}
+            @include respond-to(650px) {font-size: 19px}
+            @include respond-to(590px) {font-size: 18px}
             line-height: 29px;
             text-transform: uppercase;
         }
@@ -54,13 +59,11 @@
         }
     }
 
+
     &__closeButton {
         display: none;
-
-        @include respond-to(1090px) {
-            display: block
-        }
-
+        @include respond-to(1090px) {display: block}
+        @include respond-to(500px) {position: sticky; top: 0}
         margin-left: auto;
         position: relative;
         float:left;
@@ -75,7 +78,7 @@
             content: "✖";
             position: absolute;
             width: 30px;
-            left: 1px;
+            left: 0;
             top: 3.3px;
             color: #e9e6e4;
             display: block;
@@ -99,15 +102,24 @@
     &__basics {
         display: grid;
         grid-template-columns: 150px auto;
-
-        @include respond-to(1090px) {
-            grid-template-columns: 150px auto 40px;
-        }
-
+        @include respond-to(1090px) {grid-template-columns: 150px auto 40px}
+        @include respond-to(1090px) {grid-template-columns: 150px auto 17px}
+        @include respond-to(440px) {grid-template-columns: auto 38px}
         -moz-column-gap: 25px;
         column-gap: 25px;
+        @include respond-to(440px) {
+            -moz-column-gap: 10px;
+            column-gap: 10px;
+        }
+
+        &-midBox {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
 
         img {
+            @include respond-to(440px) {display: none}
             width: 150px;
             height: 150px;
             -o-object-fit: cover;
@@ -116,13 +128,30 @@
     }
 
     &__btns {
-        margin-top: 35px;
+        @include respond-to(1090px) {display: flex}
+        @include respond-to(500px) {flex-direction: column}
+        @include respond-to(440px) {flex-direction: row}
+
+        a:nth-child(1) {
+            @include respond-to(440px) {background-color: #8d0414} 
+        }
 
         a:nth-child(2) {
-            margin-top: 10px;
+            margin-top: 5px;
+            @include respond-to(1090px) {margin-top: 0; margin-left: 10px}
+            @include respond-to(500px) {margin-top: 5px; margin-left: 0}
+            @include respond-to(440px) {
+                margin: 0;
+                background-color: #5C5C5C;
+            }
+        }
 
-            @include respond-to(1090px) {
-                margin-left: 20px;
+        a {
+            @include respond-to(1090px) {width: 120px}
+            @include respond-to(550px) {width: 85px}
+            @include respond-to(440px) {
+                width: 100px;
+                min-width: 100px;
             }
         }
     }
@@ -149,6 +178,8 @@
                 grid-gap: 2%;
                 grid-row-gap: 0;
             }
+
+            @include respond-to(590px) {display: block;}
         }
 
         &-item {

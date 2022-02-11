@@ -60,13 +60,14 @@ const RandomChar = () => {
 const View = (props) => {
 
     const {name, description, thumbnail, homepage, wiki} = props.character;
-    const checkThumbnail = () => {
-        return thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {objectFit: 'initial'} : {objectFit: 'cover'};
+    const checkThumbnail = (item) => {
+        return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {
+            objectFit: "cover", objectPosition: "0"} : {objectFit: 'cover'};
     }
 
     return (
         <div className="randomchar__block">
-        <img style={checkThumbnail()} src={thumbnail} alt="Random character" className="randomchar__img"  />
+        <img style={checkThumbnail(thumbnail)} src={thumbnail} alt="Random character" className="randomchar__img"  />
         <div className="randomchar__info">
             <p className="randomchar__name">{name}</p>
             <p className="randomchar__descr">

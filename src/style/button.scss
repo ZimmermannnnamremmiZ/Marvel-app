@@ -3,8 +3,6 @@
 
 .button {
     min-width: 101px;
-    @include respond-to(1240px) {min-width: 85px}
-    @include respond-to(900px) {min-width: 130px}
     color: #fff;
     text-align: center;
     text-transform: uppercase;

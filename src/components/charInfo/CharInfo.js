@@ -56,8 +56,9 @@ const View = (props) => {
     const {name, description, thumbnail, homepage, wiki, comics} = props.character;
     const maxW1090px = useMediaQuery({ query: '(max-width: 1090px)' })
 
-    const checkThumbnail = () => {
-        return thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {objectFit: 'initial'} : {objectFit: 'cover'};
+    const checkThumbnail = (item) => {
+        return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {
+            objectFit: "cover", objectPosition: "0"} : {objectFit: 'cover'};
     }
 
     const valOfComics = () => {
@@ -83,8 +84,8 @@ const View = (props) => {
     return (
         <>
             <div className="char__basics">
-                <img style={checkThumbnail()} src={thumbnail} alt={name}/>
-                <div>
+                <img style={checkThumbnail(thumbnail)} src={thumbnail} alt={name}/>
+                <div className='char__basics-midBox'>
                     <div className="char__info-name">{name}</div>
                     <div className="char__btns">
                         <a href={homepage} className="button button__main">
