@@ -102,11 +102,15 @@
     &__basics {
         display: grid;
         grid-template-columns: 150px auto;
-
-        @include respond-to(1090px) {grid-template-columns: 150px auto 40px;}
-
+        @include respond-to(1090px) {grid-template-columns: 150px auto 40px}
+        @include respond-to(1090px) {grid-template-columns: 150px auto 17px}
+        @include respond-to(440px) {grid-template-columns: auto 38px}
         -moz-column-gap: 25px;
         column-gap: 25px;
+        @include respond-to(440px) {
+            -moz-column-gap: 10px;
+            column-gap: 10px;
+        }
 
         &-midBox {
             display: flex;
@@ -115,27 +119,40 @@
         }
 
         img {
+            @include respond-to(440px) {display: none}
             width: 150px;
             height: 150px;
             -o-object-fit: cover;
             object-fit: cover;
-
         }
     }
 
     &__btns {
         @include respond-to(1090px) {display: flex}
         @include respond-to(500px) {flex-direction: column}
+        @include respond-to(440px) {flex-direction: row}
+
+        a:nth-child(1) {
+            @include respond-to(440px) {background-color: #8d0414} 
+        }
 
         a:nth-child(2) {
             margin-top: 5px;
             @include respond-to(1090px) {margin-top: 0; margin-left: 10px}
             @include respond-to(500px) {margin-top: 5px; margin-left: 0}
+            @include respond-to(440px) {
+                margin: 0;
+                background-color: #5C5C5C;
+            }
         }
 
         a {
             @include respond-to(1090px) {width: 120px}
             @include respond-to(550px) {width: 85px}
+            @include respond-to(440px) {
+                width: 100px;
+                min-width: 100px;
+            }
         }
     }
 

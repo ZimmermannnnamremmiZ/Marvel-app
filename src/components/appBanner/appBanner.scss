@@ -6,20 +6,30 @@
         width: 100%;
         background-color: $dark;
         height: 100px;
-        padding: 0 25px 0 45px;
+        padding: 0 25px;
         display: grid;
         grid-template-columns: 152px auto 133px;
+        @include respond-to(650px) {grid-template-columns: 152px auto;}
+        @include respond-to(590px) {grid-template-columns: none;}
+        
+        :nth-child(3) {
+            @include respond-to(650px) {display: none;}
+        }
+
+        img {
+            @include respond-to(590px) {display: none;}
+        }
+
 
         &-text {
+            // @include respond-to(590px) {width: 270px;}
             font-weight: bold;
             font-size: 24px;
+            @include respond-to(650px) {font-size: 22px;}
             line-height: 32px;
             color: #FFFFFF;
-            padding-left: 83px;
-            @include respond-to(1090px) {padding-left: 130px;}
-            @include respond-to(900px) {padding-left: 80px;}
-            @include respond-to(790px) {padding-left: 50px;}
-
+            margin-left: auto;
+            margin-right: auto;
             padding-top: 18px;
         }
     }

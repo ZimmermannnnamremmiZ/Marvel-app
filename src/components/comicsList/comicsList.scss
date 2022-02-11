@@ -8,15 +8,16 @@
 
     &__grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, 225px);
-        justify-content: space-between;
-        row-gap: 55px;
-        @include respond-to(740px) {
-            grid-template-columns: repeat(3, 32.5%);
+        @include respond-to(380px) {display: block}
+        grid-template-columns: repeat(4, 24%);
+        @include respond-to(900px) {
+            grid-template-columns: repeat(3, 33%);
             grid-row-gap: 20px;
             row-gap: 20px;
         }
-
+        @include respond-to(590px) {grid-template-columns: repeat(2, 49%)}
+        justify-content: space-between;
+        row-gap: 55px;
     }
 
     &__item {
@@ -24,22 +25,26 @@
 
         &-img {
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.25);
-            width: 225px;
-            @include respond-to(740px) {width: 100%}
+            width: 100%;
             height: 345px;
+            @include respond-to(650px) {height: 301px}
+            @include respond-to(380px) {height: 414px}
         }
 
         &-name {
             margin-top: 10px;
             font-weight: bold;
             font-size: 14px;
+            @include respond-to(590px) {font-size: 18px}
             line-height: 18px;
         }
 
         &-price {
             margin-top: 5px;
+            @include respond-to(380px) {margin-bottom: 25px}
             font-weight: bold;
             font-size: 14px;
+            @include respond-to(590px) {font-size: 18px}
             line-height: 18px;
             color: rgba(0, 0, 0, 0.6);
             text-transform: uppercase;
@@ -49,6 +54,10 @@
             box-shadow: $itemHover;
             transform: translateY(-5px);
             @include shadow
+        }
+
+        a {
+            width: 100%;
         }
     }
 }

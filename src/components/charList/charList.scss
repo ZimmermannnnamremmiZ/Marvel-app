@@ -27,6 +27,7 @@
 
     &__grid {
         display: grid;
+        
         grid-template-columns: repeat(3, 200px);
         @include respond-to(1240px) {grid-template-columns: repeat(3, 180px)}
         @include respond-to(1090px) {grid-template-columns: repeat(3, 266.666px)}
@@ -36,7 +37,7 @@
             grid-template-columns: repeat(3, 33%);
             width: 100%;
         }
-        @include respond-to(740px) {grid-template-columns: repeat(2, 49%)}
+        @include respond-to(550px) {grid-template-columns: repeat(2, 49%)}
 
         -moz-column-gap: 25px;
         column-gap: 25px;
@@ -49,6 +50,7 @@
             -moz-column-gap: 0.5%;
             column-gap: 0.5%;
         }
+        @include respond-to(380px) {grid-template-columns: none}
         row-gap: 30px;
     }
 
@@ -78,9 +80,8 @@
                 width: calc(100% + 30px);
                 height: 210px
             }
-
-
-
+            @include respond-to(380px) {height: 300px}
+            
             -o-object-fit: cover;
             object-fit: cover;
             transform: translate(-15px, -15px);
@@ -99,7 +100,7 @@
         font-size: 22px;
         @include respond-to(1240px) {font-size: 19px}
         @include respond-to(1240px) {font-size: 17px}
-
+        @include respond-to(380px) {font-size: 24px}
         line-height: 29px;
         text-transform: uppercase;
         color: #fff;

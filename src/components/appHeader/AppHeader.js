@@ -1,14 +1,16 @@
 import {Link, NavLink} from 'react-router-dom';
 import './appHeader.scss';
+import logo from '../../resources/img/Marvel-Comics-Logo.svg'
 
 const AppHeader = () => {
     return (
         <header className="app__header">
-            <h1 className="app__title">
+            <div className="app__title">
                 <Link to="/">
-                    <span>Marvel</span> information portal
+                    <img className='app__title-logo' src={logo} alt='logo'></img>
+                    <h1 className='app__title-text'><span>Marvel</span> information portal</h1>
                 </Link>
-            </h1>
+            </div>
             <nav className="app__menu">
                 <ul>
                     <li><NavLink
