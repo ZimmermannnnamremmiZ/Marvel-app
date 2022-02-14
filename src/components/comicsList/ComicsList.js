@@ -9,7 +9,7 @@ import './comicsList.scss';
 const ComicsList = () => {
     const [comics, setComics] = useState([])
     const [newItemLoading, setNewItemLoading] = useState(false)
-    const [offset, setOffset] = useState(10)
+    const [offset, setOffset] = useState()
     const [comicsEnded, setComicsEnded] = useState(false)
 
     const {loading, error, getAllComics} = useMarvelService();
