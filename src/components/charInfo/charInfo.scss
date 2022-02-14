@@ -25,20 +25,16 @@
         }
 
         @include respond-to(790px) {
-            width: 720px;
-            margin-left: -360px;
-        }
-
-        @include respond-to(790px) {
             width: 98%;
             margin-left: -49%;
         }
 
         @include respond-to(740px) {
-            position: absolute;
+            position: fixed;
             top: 0;
-            width: 104%;
-            margin-left: -52%;
+            bottom: 0;
+            overflow-y: scroll;
+            overflow-x: hidden;
         }
 
         z-index: 5;
@@ -63,7 +59,6 @@
     &__closeButton {
         display: none;
         @include respond-to(1090px) {display: block}
-        @include respond-to(500px) {position: sticky; top: 0}
         margin-left: auto;
         position: relative;
         float:left;
@@ -103,14 +98,9 @@
         display: grid;
         grid-template-columns: 150px auto;
         @include respond-to(1090px) {grid-template-columns: 150px auto 40px}
-        @include respond-to(1090px) {grid-template-columns: 150px auto 17px}
-        @include respond-to(440px) {grid-template-columns: auto 38px}
-        -moz-column-gap: 25px;
-        column-gap: 25px;
-        @include respond-to(440px) {
-            -moz-column-gap: 10px;
-            column-gap: 10px;
-        }
+        @include respond-to(440px) {grid-template-columns: auto 40px}
+        -moz-column-gap: 10px;
+        column-gap: 10px;
 
         &-midBox {
             display: flex;
