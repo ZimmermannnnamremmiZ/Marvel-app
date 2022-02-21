@@ -1,0 +1,96 @@
+@import '../../style/adaptive.scss';
+
+.charSearchForm {
+    @include respond-to(1090px) {
+        width: 100%;
+        position: absolute;
+        top: 235px;
+    }
+
+    @include respond-to(900px) {
+        top: 490px
+    }
+
+    @include respond-to(500px) {
+        top: 400px
+    }
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    min-height: 127px;
+    border-radius: 0px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.25);
+
+    &__lable {
+        position: absolute;
+        margin-left: 25px;
+        margin-top: 25px;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 21.09px;
+    }
+
+    &__searchBlock {
+        display: flex;
+        margin-top: 64px;
+        margin-left: 25px;
+    }
+
+    &__input {
+        width: 250px;
+
+        @include respond-to(1090px) {
+            width: 82%
+        }
+
+        height: 38px;
+        padding: 10px 10.45px;
+        font-size: 14px;
+        color: rgba(0, 0, 0, 0.5);
+        border: none;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    }
+
+    &__buttons {
+        margin-left: 24px;
+
+        @include respond-to(1240px) {
+            margin-right: 25px
+        }
+
+        &:hover {
+            transform: none;
+        }
+    }
+
+    &__buttonsBox {
+        display: flex;
+
+        :nth-child(2) {
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+    }
+
+    &__error {
+        color: #9F0013;
+    }
+
+    &__finded {
+        @include respond-to(1090px) {
+            width: 100%
+        }
+
+        width: 225px;
+        color: #03710E;
+    }
+}
+
+.checkInput {
+    margin: 25px;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 21px;
+}
