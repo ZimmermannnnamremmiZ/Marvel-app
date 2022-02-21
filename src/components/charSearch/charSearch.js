@@ -20,9 +20,9 @@ const validate = values => {
 }
 
 const CharSearch = () => {
-    const {getCharacterBySearch} = useMarvelService();
+    const {getCharacterByName} = useMarvelService();
 
-    const [charName, setCharName] = useState('')
+    const [charData, setCharData] = useState('')
 
     const formik = useFormik({
         initialValues: {
@@ -30,8 +30,8 @@ const CharSearch = () => {
         },
         validate,
         onSubmit: value => {
-            getCharacterBySearch(value.searchValue)
-                .then(res => {setCharName(res.name)})
+            getCharacterByName(value.searchValue)
+                .then(res => {setCharData(res); console.log(charData)})
                 .catch(err => {console.log(err)})
         }
     });
@@ -60,18 +60,18 @@ const CharSearch = () => {
                             <div className='charSearchForm__error checkInput'>
                                 {formik.errors.searchValue}
                             </div>
-                        : !formik.errors.searchValue && charName && charName !== 'nothing' ?
+                        : !formik.errors.searchValue && charData.name && charData.name !== 'nothing' ?
                             <div className='charSearchForm__buttonsBox'>
                                 <div className='charSearchForm__finded checkInput'>
-                                    {`There is! Visit ${charName} page?`}
+                                    {`There is! Visit ${charData.name} page?`}
                                 </div>
-                                <Link to={`/characters/${charName}`} >
+                                <Link to={`/characters/${charData.id}`} >
                                     <button className='charSearchForm__buttons button button__secondary'>
                                         <div className="inner">TO PAGE</div>
                                     </button>
                                 </Link>
                             </div>
-                        : !formik.errors.searchValue && charName === undefined && charName !== '' ?
+                        : !formik.errors.searchValue && charData === 'nothing'?
                             <div className='charSearchForm__error checkInput'>
                                 The character was not found. Check the name and try again
                             </div>

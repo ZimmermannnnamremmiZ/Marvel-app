@@ -1,6 +1,14 @@
 @import '../../style/adaptive.scss';
 
 .charSearchForm {
+    @include respond-to(1090px) {
+        width: 100%;
+        position: absolute;
+        top: 235px;
+    }
+    @include respond-to(900px) {top: 490px}
+    @include respond-to(500px) {top: 400px}
+
     display: flex;
     flex-direction: column;
     margin-top: 30px;
@@ -26,6 +34,7 @@
 
     &__input {
         width: 250px;
+        @include respond-to(1090px) {width: 82%}
         height: 38px;
         padding: 10px 10.45px;
         font-size: 14px;
@@ -61,6 +70,7 @@
 }
 
 .checkInput {
+    width: 100%;
     margin: 25px;
     font-weight: bold;
     font-size: 18px;
