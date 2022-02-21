@@ -26,7 +26,7 @@ const  CharInfo = (props) => {
                 .then(onCharacterLoaded)
                 .then(setVisibility({display: "block"}))
         }
-    updateCharacter()
+        updateCharacter()
     }, [props.characterId])
 
     const onCharacterLoaded = (character) => {

@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
+import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 
 const Comics = (props) => {
@@ -20,29 +21,31 @@ const Comics = (props) => {
 
     const everyComics = comics.map((item, i) => {
         return (
-                <li
-                    ref={el => ComicsRefs.current[i] = el}   //массив ссылок на DOM элемент
-                    tabIndex={0}
-                    className="comics__item"
-                    key={item.id}
-                    onClick={() => {onComicsFocus(i)}}
-                    onKeyPress={(el) => {
-                        if (el.key === ' ' || el.key === 'Enter') {onComicsFocus(i)}
-                    }}
-                >
-                    <Link to={`/comics/${item.id}`} href={item.homepage}>
-                        <img style={checkThumbnail(item.thumbnail)} src={item.thumbnail} alt={item.title} className="comics__item-img"/>
-                        <div className="comics__item-name">{item.title}</div>
-                        <div className="comics__item-price">{item.price}</div>
-                    </Link>
-                </li>
+                <CSSTransition key={item.i} timeout={600} classNames="item">
+                    <div
+                        ref={el => ComicsRefs.current[i] = el}   //массив ссылок на DOM элемент
+                        key={item.id}
+                        tabIndex={0}
+                        className="comics__item"
+                        onClick={() => {onComicsFocus(i)}}
+                        onKeyPress={(el) => {
+                            if (el.key === ' ' || el.key === 'Enter') {onComicsFocus(i)}
+                        }}
+                    >
+                        <Link to={`/comics/${item.id}`} href={item.homepage}>
+                            <img style={checkThumbnail(item.thumbnail)} src={item.thumbnail} alt={item.title} className="comics__item-img"/>
+                            <div className="comics__item-name">{item.title}</div>
+                            <div className="comics__item-price">{item.price}</div>
+                        </Link>
+                    </div>
+                </CSSTransition>
         )
     })
 
     return (
-        <ul className="comics__grid">
+        <TransitionGroup className="comics__grid">
             {everyComics}
-        </ul>
+        </TransitionGroup>
     )
 }
 

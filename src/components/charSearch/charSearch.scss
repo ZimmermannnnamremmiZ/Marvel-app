@@ -59,7 +59,7 @@
         @include respond-to(1240px) {
             margin-right: 25px
         }
-
+      
         &:hover {
             transform: none;
         }
@@ -79,11 +79,10 @@
     }
 
     &__finded {
+        width: 225px;
         @include respond-to(1090px) {
             width: 100%
         }
-
-        width: 225px;
         color: #03710E;
     }
 }

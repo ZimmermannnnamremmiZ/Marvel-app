@@ -2,6 +2,7 @@ import { useState } from "react";
 import RandomChar from "../randomChar/RandomChar";
 import CharList from "../charList/CharList";
 import CharInfo from "../charInfo/CharInfo";
+import CharSearch from "../charSearch/charSearch";
 import ErrorBoundary from '../errorBoundary/ErrorBoundary';
 
 import decoration from '../../resources/img/vision.png';
@@ -23,7 +24,10 @@ import decoration from '../../resources/img/vision.png';
                         <CharList onCharacterSelected={onCharacterSelected} />
                     </ErrorBoundary>
                     <ErrorBoundary>
-                        <CharInfo characterId={selectedCharacter} />
+                        <div style={{display: "flex", flexDirection: "column"}}>
+                            <CharInfo characterId={selectedCharacter} />
+                            <CharSearch ></CharSearch>
+                        </div>
                     </ErrorBoundary>
                 </div>
                 <img className="bg-decoration" src={decoration} alt="vision"/>

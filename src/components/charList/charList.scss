@@ -4,7 +4,8 @@
 .char {
     &__content {
         margin-top: 50px;
-        @include respond-to(740px) {margin-top: 40px}
+        @include respond-to(1090px) {margin-top: 140px}
+        @include respond-to(900px) {margin-top: 170px}
         display: grid;
         grid-template-columns: 650px 425px;
 
@@ -37,7 +38,10 @@
             grid-template-columns: repeat(3, 33%);
             width: 100%;
         }
-        @include respond-to(550px) {grid-template-columns: repeat(2, 49%)}
+        @include respond-to(550px) {
+            justify-content: space-between;
+            grid-template-columns: repeat(2, 49%)
+        }
 
         -moz-column-gap: 25px;
         column-gap: 25px;
@@ -105,4 +109,19 @@
         text-transform: uppercase;
         color: #fff;
     }
+}
+
+.item-enter {
+    opacity: 0;
+}
+.item-enter-active {
+    opacity: 1;
+    transition: opacity 600ms ease-in;
+}
+.item-exit {
+    opacity: 1;
+}
+.item-exit-active {
+    opacity: 0;
+    transition: opacity 600ms ease-in;
 }

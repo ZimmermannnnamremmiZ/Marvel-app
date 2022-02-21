@@ -1,0 +1,80 @@
+@import '../../../style/variables.scss';
+@import '../../../style/adaptive.scss';
+
+.single-char {
+    display: flex;
+    margin-top: 50px;
+
+    @include respond-to(590px) {
+        flex-direction: column;
+        margin-top: 20px;
+        width: 95%;
+        margin-left: auto;
+        margin-right: auto
+    }
+
+    &__img {
+        width: 293px;
+
+        @include respond-to(1090px) {
+            width: 250px;
+            margin-right: 25px
+        }
+
+        @include respond-to(590px) {
+            width: 345px;
+            margin-bottom: 25px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @include respond-to(400px) {
+            width: 100%
+        }
+
+        height: auto;
+        float: left;
+        margin-right: 50px;
+    }
+
+    &__info {
+        width: 550px;
+        @include respond-to(590px) {width: 100%}
+
+        @include respond-to(790px) {
+            margin-right: 25px;
+        }
+    }
+
+    &__name {
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 29px;
+    }
+
+    &__descr {
+        font-size: 18px;
+        line-height: 24px;
+        margin-top: 25px;
+    }
+
+    &__back {
+        min-width: 165px;
+
+        @include respond-to(1090px) {
+            min-width: 120px
+        }
+
+        margin-left: auto;
+
+        @include respond-to(790px) {
+            position: absolute;
+            right: 0;
+        }
+
+        @include respond-to(590px) {
+            position: static;
+            margin: 25px auto;
+        }
+    }
+}
