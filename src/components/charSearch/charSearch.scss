@@ -6,8 +6,14 @@
         position: absolute;
         top: 235px;
     }
-    @include respond-to(900px) {top: 490px}
-    @include respond-to(500px) {top: 400px}
+
+    @include respond-to(900px) {
+        top: 490px
+    }
+
+    @include respond-to(500px) {
+        top: 400px
+    }
 
     display: flex;
     flex-direction: column;
@@ -34,7 +40,11 @@
 
     &__input {
         width: 250px;
-        @include respond-to(1090px) {width: 82%}
+
+        @include respond-to(1090px) {
+            width: 82%
+        }
+
         height: 38px;
         padding: 10px 10.45px;
         font-size: 14px;
@@ -45,7 +55,11 @@
 
     &__buttons {
         margin-left: 24px;
-        @include respond-to(1240px) {margin-right: 25px}
+
+        @include respond-to(1240px) {
+            margin-right: 25px
+        }
+      
         &:hover {
             transform: none;
         }
@@ -53,6 +67,7 @@
 
     &__buttonsBox {
         display: flex;
+
         :nth-child(2) {
             margin-top: 15px;
             margin-bottom: 25px;
@@ -65,12 +80,14 @@
 
     &__finded {
         width: 225px;
+        @include respond-to(1090px) {
+            width: 100%
+        }
         color: #03710E;
     }
 }
 
 .checkInput {
-    width: 100%;
     margin: 25px;
     font-weight: bold;
     font-size: 18px;
