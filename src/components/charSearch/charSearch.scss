@@ -1,3 +1,5 @@
+@import '../../style/adaptive.scss';
+
 .charSearchForm {
     display: flex;
     flex-direction: column;
@@ -34,6 +36,7 @@
 
     &__buttons {
         margin-left: 24px;
+        @include respond-to(1240px) {margin-right: 25px}
         &:hover {
             transform: none;
         }

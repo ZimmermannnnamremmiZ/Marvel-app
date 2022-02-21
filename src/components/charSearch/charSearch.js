@@ -33,7 +33,7 @@ const CharSearch = () => {
             getCharacterBySearch(value.searchValue)
                 .then(res => {setCharName(res.name)})
                 .catch(err => {console.log(err)})
-        },
+        }
     });
 
 
@@ -65,7 +65,7 @@ const CharSearch = () => {
                                 <div className='charSearchForm__finded checkInput'>
                                     {`There is! Visit ${charName} page?`}
                                 </div>
-                                <Link to='/charSearched' >
+                                <Link to={`/characters/${charName}`} >
                                     <button className='charSearchForm__buttons button button__secondary'>
                                         <div className="inner">TO PAGE</div>
                                     </button>

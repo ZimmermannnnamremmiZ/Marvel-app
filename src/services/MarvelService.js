@@ -59,7 +59,9 @@ const useMarvelService = () => {
 
     const _transformSearchedCharacter = (character) => {
         return {
-            name: character.name
+            name: character.name,
+            description: character.description ? character.description : character.description = 'No description for this character',
+            thumbnail: character.thumbnail.path + '.' + character.thumbnail.extension
         }
     }
 
