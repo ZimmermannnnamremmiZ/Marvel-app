@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive'
 
 import Spinner from '../spinner/Spinner';
@@ -53,7 +54,7 @@ const  CharInfo = (props) => {
 }
 
 const View = (props) => {
-    const {name, description, thumbnail, homepage, wiki, comics} = props.character;
+    const {id, name, description, thumbnail, homepage, wiki, comics} = props.character;
     const maxW1090px = useMediaQuery({ query: '(max-width: 1090px)' })
 
     const checkThumbnail = (item) => {
@@ -88,9 +89,11 @@ const View = (props) => {
                 <div className='char__basics-midBox'>
                     <div className="char__info-name">{name}</div>
                     <div className="char__btns">
-                        <a href={homepage} className="button button__main">
-                            <div className="inner">homepage</div>
-                        </a>
+                        <Link to={`/characters/${id}`} >
+                                    <button className='button button__main'>
+                                        <div className="inner">homepage</div>
+                                    </button>
+                        </Link>
                         <a href={wiki} className="button button__secondary">
                             <div className="inner">Wiki</div>
                         </a>
