@@ -14,7 +14,7 @@ const  CharInfo = (props) => {
     const [character, setCharacter] = useState(null)
     const [visibility, setVisibility] = useState()
     
-    const {loading, error, getCharacter, clearError} = useMarvelService();
+    const {loading, error, getCharacter, clearError, process, setProcess} = useMarvelService();
     const maxW1090px = useMediaQuery({ query: '(max-width: 1090px)' })
 
     useEffect(() => {
@@ -38,6 +38,25 @@ const  CharInfo = (props) => {
         setVisibility({display: "none"})
     }
 
+    const setContent = (process, character) => {
+        switch (process) {
+            case 'waiting':
+                return <Skeleton />;
+                break;
+            case 'loading':
+                return <Spinner />;
+                break;
+            case 'error':
+                return <ErrorMessage />;
+                break;
+            case 'confirmed':
+                return <View onClose={onClose} character={character}/>;
+                break;
+            default:
+                throw new Error('Unexpected process state')
+        }
+    }
+
         const skeleton = character || maxW1090px || loading || error ? null : <Skeleton />;
         const errorMessage = error ? <ErrorMessage /> : null;
         const spinner = loading ? <Spinner /> : null;
@@ -54,7 +73,7 @@ const  CharInfo = (props) => {
 }
 
 const View = (props) => {
-    const {id, name, description, thumbnail, homepage, wiki, comics} = props.character;
+    const {id, name, description, thumbnail, wiki, comics} = props.character;
     const maxW1090px = useMediaQuery({ query: '(max-width: 1090px)' })
 
     const checkThumbnail = (item) => {
