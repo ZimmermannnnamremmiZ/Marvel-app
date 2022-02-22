@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from "react-helmet";
 
 import AppBanner from "../../appBanner/AppBanner";
 
@@ -17,6 +18,13 @@ const SingleCharRender = ({data}) => {
     <>
         <AppBanner />
         <div className="single-char">
+            <Helmet>
+                <meta
+                    name="description"
+                    content={`${name} comics book`}
+                />
+                <title>{name}</title>
+            </Helmet>
             <img style={checkThumbnail(thumbnail)} src={thumbnail} alt={name} className="single-char__img"/>
             <div className="single-char__info">
                 <h2 className="single-char__name">{name.toUpperCase()}</h2>

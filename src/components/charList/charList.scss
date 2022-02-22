@@ -32,8 +32,8 @@
         grid-template-columns: repeat(3, 200px);
         @include respond-to(1240px) {grid-template-columns: repeat(3, 180px)}
         @include respond-to(1090px) {grid-template-columns: repeat(3, 266.666px)}
-        @include respond-to(900px) {grid-template-columns: repeat(3, 233.33px);}
-        @include respond-to(790px) {grid-template-columns: repeat(3, 210px);}
+        @include respond-to(900px) {grid-template-columns: repeat(3, 233.33px)}
+        @include respond-to(790px) {grid-template-columns: repeat(3, 210px)}
         @include respond-to(740px) {
             grid-template-columns: repeat(3, 33%);
             width: 100%;
