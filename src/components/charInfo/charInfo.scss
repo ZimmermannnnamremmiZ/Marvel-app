@@ -123,12 +123,12 @@
         @include respond-to(440px) {flex-direction: row}
 
         a:nth-child(1) {
-            @include respond-to(440px) {background-color: #8d0414} 
+            @include respond-to(440px) {background-color: #8d0414}
         }
 
         a:nth-child(2) {
             margin-top: 5px;
-            @include respond-to(1090px) {margin-top: 0; margin-left: 10px}
+            @include respond-to(1090px) {margin-top: 0;}
             @include respond-to(500px) {margin-top: 5px; margin-left: 0}
             @include respond-to(440px) {
                 margin: 0;
@@ -138,7 +138,7 @@
 
         a {
             @include respond-to(1090px) {width: 120px}
-            @include respond-to(550px) {width: 85px}
+            @include respond-to(500px) {width: 85px}
             @include respond-to(440px) {
                 width: 100px;
                 min-width: 100px;

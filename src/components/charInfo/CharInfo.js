@@ -2,10 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive'
 
-import Spinner from '../spinner/Spinner';
-import ErrorMessage from '../errorMessage/ErrorMessage';
-import Skeleton from '../skeleton/Skeleton'
 import useMarvelService from '../../services/MarvelService';
+import setContent from '../../utils/setContent';
 
 import './charInfo.scss';
 
@@ -13,9 +11,8 @@ const  CharInfo = (props) => {
 
     const [character, setCharacter] = useState(null)
     const [visibility, setVisibility] = useState()
-    
-    const {loading, error, getCharacter, clearError, process, setProcess} = useMarvelService();
-    const maxW1090px = useMediaQuery({ query: '(max-width: 1090px)' })
+
+    const {getCharacter, clearError, process, setProcess} = useMarvelService();
 
     useEffect(() => {
         const updateCharacter = () => {
@@ -25,6 +22,7 @@ const  CharInfo = (props) => {
             clearError();
             getCharacter(props.characterId)
                 .then(onCharacterLoaded)
+                .then(() => setProcess('confirmed'))
                 .then(setVisibility({display: "block"}))
         }
         updateCharacter()
@@ -38,42 +36,15 @@ const  CharInfo = (props) => {
         setVisibility({display: "none"})
     }
 
-    const setContent = (process, character) => {
-        switch (process) {
-            case 'waiting':
-                return <Skeleton />;
-                break;
-            case 'loading':
-                return <Spinner />;
-                break;
-            case 'error':
-                return <ErrorMessage />;
-                break;
-            case 'confirmed':
-                return <View onClose={onClose} character={character}/>;
-                break;
-            default:
-                throw new Error('Unexpected process state')
-        }
-    }
-
-        const skeleton = character || maxW1090px || loading || error ? null : <Skeleton />;
-        const errorMessage = error ? <ErrorMessage /> : null;
-        const spinner = loading ? <Spinner /> : null;
-        const content = !(loading || error || !character) ? <View onClose={onClose} character={character}/> : null;
-
         return (
             <div className="char__info" style={visibility}>
-                {skeleton}
-                {errorMessage}
-                {spinner}
-                {content}
+                {setContent(process, View, character, onClose)}
             </div>
         )
 }
 
-const View = (props) => {
-    const {id, name, description, thumbnail, wiki, comics} = props.character;
+const View = ({onClose,  data}) => {
+    const {id, name, description, thumbnail, wiki, comics} = data;
     const maxW1090px = useMediaQuery({ query: '(max-width: 1090px)' })
 
     const checkThumbnail = (item) => {
@@ -89,7 +60,7 @@ const View = (props) => {
                 </li>
             )
         })};
-        
+
         return comics.map((item, i) => {
             return  i < 9 ? (
                 <li className="char__comics-item" key={i}>
@@ -98,8 +69,8 @@ const View = (props) => {
             ) : null
         })
     }
-        
-        
+
+
 
     return (
         <>
@@ -118,14 +89,14 @@ const View = (props) => {
                         </a>
                     </div>
                 </div>
-                <button onClick={() => props.onClose()} className='char__closeButton'></button>
+                <button onClick={() => onClose()} className='char__closeButton'></button>
             </div>
             <div className="char__descr">
                {description}
             </div>
             <div className="char__comics">Comics:</div>
             <ul className="char__comics-list">
-                {!comics.length ? <ErrorMessage /> : null}
+                {/* {!comics.length ? <ErrorMessage /> : null} */}
                 {valOfComics()}
             </ul>
         </>
