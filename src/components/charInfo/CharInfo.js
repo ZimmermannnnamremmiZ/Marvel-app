@@ -2,59 +2,52 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive'
 
-import Spinner from '../spinner/Spinner';
-import ErrorMessage from '../errorMessage/ErrorMessage';
-import Skeleton from '../skeleton/Skeleton'
 import useMarvelService from '../../services/MarvelService';
+import setContent from '../../utils/setContent';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import './charInfo.scss';
 
-const  CharInfo = (props) => {
+const  CharInfo = ({characterId}) => {
 
     const [character, setCharacter] = useState(null)
     const [visibility, setVisibility] = useState()
-    
-    const {loading, error, getCharacter, clearError} = useMarvelService();
-    const maxW1090px = useMediaQuery({ query: '(max-width: 1090px)' })
+
+    const {getCharacter, clearError, process, setProcess} = useMarvelService();
 
     useEffect(() => {
         const updateCharacter = () => {
-            if (!props.characterId) {
+            if (!characterId) {
                 return;
             };
             clearError();
-            getCharacter(props.characterId)
+            getCharacter(characterId)
                 .then(onCharacterLoaded)
-                .then(setVisibility({display: "block"}))
+                .then(() => setProcess('confirmed'))
         }
         updateCharacter()
-    }, [props.characterId])
+    }, [characterId])
 
     const onCharacterLoaded = (character) => {
         setCharacter(character)
+        setVisibility({display: "block"})
     }
 
     const onClose = () => {
         setVisibility({display: "none"})
     }
 
-        const skeleton = character || maxW1090px || loading || error ? null : <Skeleton />;
-        const errorMessage = error ? <ErrorMessage /> : null;
-        const spinner = loading ? <Spinner /> : null;
-        const content = !(loading || error || !character) ? <View onClose={onClose} character={character}/> : null;
+    const data = {character, onClose}
 
-        return (
-            <div className="char__info" style={visibility}>
-                {skeleton}
-                {errorMessage}
-                {spinner}
-                {content}
-            </div>
-        )
+    return (
+        <div className="char__info" style={visibility}>
+            {setContent(process, View, data)}
+        </div>
+    )
 }
 
-const View = (props) => {
-    const {id, name, description, thumbnail, homepage, wiki, comics} = props.character;
+const View = ({character, onClose}) => {
+    const {id, name, description, thumbnail, wiki, comics} = character;
     const maxW1090px = useMediaQuery({ query: '(max-width: 1090px)' })
 
     const checkThumbnail = (item) => {
@@ -70,7 +63,7 @@ const View = (props) => {
                 </li>
             )
         })};
-        
+
         return comics.map((item, i) => {
             return  i < 9 ? (
                 <li className="char__comics-item" key={i}>
@@ -79,8 +72,8 @@ const View = (props) => {
             ) : null
         })
     }
-        
-        
+
+
 
     return (
         <>
@@ -90,16 +83,16 @@ const View = (props) => {
                     <div className="char__info-name">{name}</div>
                     <div className="char__btns">
                         <Link to={`/characters/${id}`} >
-                                    <button className='button button__main'>
-                                        <div className="inner">homepage</div>
-                                    </button>
+                            <button className='button button__main'>
+                                <div className="inner">homepage</div>
+                            </button>
                         </Link>
                         <a href={wiki} className="button button__secondary">
                             <div className="inner">Wiki</div>
                         </a>
                     </div>
                 </div>
-                <button onClick={() => props.onClose()} className='char__closeButton'></button>
+                <button onClick={() => onClose()} className='char__closeButton'></button>
             </div>
             <div className="char__descr">
                {description}

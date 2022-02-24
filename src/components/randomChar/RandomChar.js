@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
-import Spinner from '../spinner/Spinner';
-import ErrorMessage from '../errorMessage/ErrorMessage';
+import setContent from '../../utils/setContent';
 import useMarvelService from '../../services/MarvelService';
 
 
@@ -10,12 +9,12 @@ import mjolnir from '../../resources/img/mjolnir.png';
 
 const RandomChar = () => {
     const [character, setCharacter] = useState(null)
-    const {loading, error, getCharacter, clearError} = useMarvelService();
+    const {getCharacter, clearError, process, setProcess} = useMarvelService();
 
     useEffect(() => {
         updateCharacter();
-        // const timerId = setInterval(updateCharacter, 9000);
-        // return () => {clearInterval(timerId)}
+        const timerId = setInterval(updateCharacter, 9000);
+        return () => {clearInterval(timerId)}
     }, [])
 
     const onCharacterLoaded = (character) => {
@@ -27,19 +26,12 @@ const RandomChar = () => {
         const id = Math.floor(Math.random()*(1011400-1011000)+1011000);
         getCharacter(id)
             .then(onCharacterLoaded)
+            .then(() => setProcess('confirmed'))
     }
-
-
-
-    const errorMessage = error ? <ErrorMessage /> : null;
-    const spinner = loading ? <Spinner /> : null;
-    const content = !(loading || error || !character) ? <View character={character}/> : null;
 
     return (
         <div className="randomchar">
-            {errorMessage}
-            {spinner}
-            {content}
+            {setContent(process, View, {character})}
             <div className="randomchar__static">
                 <p className="randomchar__title">
                     Random character for today!<br/>
@@ -57,9 +49,9 @@ const RandomChar = () => {
     )
 }
 
-const View = (props) => {
+const View = ({character}) => {
 
-    const {name, description, thumbnail, homepage, wiki} = props.character;
+    const {name, description, thumbnail, homepage, wiki} = character;
     const checkThumbnail = (item) => {
         return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {
             objectFit: "cover", objectPosition: "0"} : {objectFit: 'cover'};

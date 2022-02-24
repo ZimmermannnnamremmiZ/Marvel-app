@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 
-const Comics = (props) => {
+const Comics = ({comics}) => {
     const ComicsRefs = useRef([]);
 
     const onComicsFocus = (id) => {
@@ -11,8 +11,6 @@ const Comics = (props) => {
         ComicsRefs.current[id].classList.add('comics__item_selected')
         ComicsRefs.current[id].focus()
     }
-
-    const {comics} = props;
 
     const checkThumbnail = (item) => {
         return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {

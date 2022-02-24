@@ -2,48 +2,43 @@ import { useRef } from 'react';
 import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import PropTypes from 'prop-types';
 
-const Characters = (props) => {
+const Characters = ({characters, onCharacterSelected}) => {
     const charRefs = useRef([]);
-
     const onCharacterFocus = (id) => {
         charRefs.current.forEach(item => item.classList.remove('char__item_selected'))
         charRefs.current[id].classList.add('char__item_selected')
         charRefs.current[id].focus()
     }
 
-
-    const {characters, onCharacterSelected} = props;
-
     const checkThumbnail = (item) => {
         return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {
             objectFit: "cover", objectPosition: "0"} : {objectFit: 'cover'};
     }
-    
-    return (
-    <TransitionGroup className="char__grid">
-            {characters.map((item, i) => (
-                <CSSTransition key={item.id} timeout={600} classNames="item">
-                    <div
-                        ref={el => charRefs.current[i] = el} //массив ссылок на DOM элемент
-                        tabIndex={0}
-                        className="char__item"
-                        onClick={() => {onCharacterSelected(item.id);
-                                        onCharacterFocus(i)}}
-                        onKeyPress={(el) => {
-                            if (el.key === ' ' || el.key === 'Enter') {
-                                onCharacterSelected(item.id);
-                                onCharacterFocus(i)
-                            }
-                        }}
-                    >
-                        <img style={checkThumbnail(item.thumbnail)} src={item.thumbnail} alt={item.name}/>
-                        <div className="char__name">{item.name}</div>
-                    </div>
-                </CSSTransition>
-            ))}
-    </TransitionGroup>
-    )
 
+    return (
+        <TransitionGroup className="char__grid">
+                {characters.map((item, i) => (
+                    <CSSTransition key={item.id} timeout={600} classNames="item">
+                        <div
+                            ref={el => charRefs.current[i] = el} //массив ссылок на DOM элемент
+                            tabIndex={0}
+                            className="char__item"
+                            onClick={() => {onCharacterSelected(item.id);
+                                            onCharacterFocus(i)}}
+                            onKeyPress={(el) => {
+                                if (el.key === ' ' || el.key === 'Enter') {
+                                    onCharacterSelected(item.id);
+                                    onCharacterFocus(i)
+                                }
+                            }}
+                        >
+                            <img style={checkThumbnail(item.thumbnail)} src={item.thumbnail} alt={item.name}/>
+                            <div className="char__name">{item.name}</div>
+                        </div>
+                    </CSSTransition>
+                ))}
+        </TransitionGroup>
+    )
 }
 
 Characters.propTypes = {

@@ -15,9 +15,9 @@ import decoration from '../../resources/img/vision.png';
         }
 
         const [selectedCharacter, setSelectedCharacter] = useState(null)
-
+        console.log('main page')
         return (
-            <>  
+            <>
                 <Helmet>
                     <meta
                         name="description"
@@ -35,7 +35,7 @@ import decoration from '../../resources/img/vision.png';
                     <ErrorBoundary>
                         <div style={{display: "flex", flexDirection: "column"}}>
                             <CharInfo characterId={selectedCharacter} />
-                            <CharSearch ></CharSearch>
+                            <CharSearch />
                         </div>
                     </ErrorBoundary>
                 </div>

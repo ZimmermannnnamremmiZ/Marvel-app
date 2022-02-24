@@ -31,7 +31,7 @@ const CharSearch = () => {
         validate,
         onSubmit: value => {
             getCharacterByName(value.searchValue)
-                .then(res => {setCharData(res); console.log(charData)})
+                .then(res => {setCharData(res)})
                 .catch(err => {console.log(err)})
         }
     });
@@ -57,10 +57,13 @@ const CharSearch = () => {
                 </div>
                     {
                         formik.errors.searchValue && formik.touched.searchValue ?
+
                             <div className='charSearchForm__error checkInput'>
                                 {formik.errors.searchValue}
                             </div>
-                        : !formik.errors.searchValue && charData.name && charData.name !== 'nothing' ?
+
+                        : !formik.errors.searchValue && charData.name !== undefined ?
+
                             <div className='charSearchForm__buttonsBox'>
                                 <div className='charSearchForm__finded checkInput'>
                                     {`There is! Visit ${charData.name} page?`}
@@ -71,10 +74,13 @@ const CharSearch = () => {
                                     </button>
                                 </Link>
                             </div>
+
                         : !formik.errors.searchValue && charData === 'nothing'?
+                        
                             <div className='charSearchForm__error checkInput'>
                                 The character was not found. Check the name and try again
                             </div>
+
                         : null
                     }
             </form>

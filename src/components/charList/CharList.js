@@ -1,22 +1,43 @@
-import { useEffect, useState } from 'react';
-import Characters from './Characters';
-import ErrorMessage from '../errorMessage/ErrorMessage';
-import Spinner from '../spinner/Spinner';
+import { useEffect, useMemo, useState } from 'react';
+
 import useMarvelService from '../../services/MarvelService';
 import PropTypes from 'prop-types';
+import Characters from './Characters';
+import Spinner from '../spinner/Spinner';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import './charList.scss';
 
-const CharList = (props) => {
+const setContent = (process, Component, props, newItemLoading) => {
+    switch (process) {
+        case 'waiting':
+            return <Spinner />;
+            break;
+        case 'loading':
+            return newItemLoading ? <Component {...props}/> : <Spinner />;
+            break;
+        case 'confirmed':
+            return <Component {...props}/>;
+            break;
+        case 'error':
+            return <ErrorMessage />;
+            break;
+        default:
+            throw new Error('Unexpected process state')
+    }
+}
+
+const CharList = ({onCharacterSelected}) => {
     const [characters, setCharacters] = useState([])
     const [newItemLoading, setNewItemLoading] = useState(false)
     const [offset, setOffset] = useState(110)
     const [charEnded, setCharEnded] = useState(false)
 
-    const {loading, error, getAllCharacters} = useMarvelService();
+    const {getAllCharacters, process, setProcess} = useMarvelService();
 
     useEffect(() => {
-        onRequest(offset, true)
+        onRequest(offset, true);
+        // eslint-disable-next-line
     }, [])
 
     const onCharactersLoaded = (newCharacters) => {
@@ -35,17 +56,19 @@ const CharList = (props) => {
         initial ? setNewItemLoading(false) : setNewItemLoading(true)
         getAllCharacters(offset)
             .then(onCharactersLoaded)
+            .then(() => setProcess('confirmed'))
     }
 
-    const errorMessage = error ? <ErrorMessage /> : null;
-    const spinner = loading && !newItemLoading ? <Spinner /> : null;
-  
+    const data = {onCharacterSelected, characters}
+
+    const elements = useMemo(() => {
+        return setContent(process, Characters, data, newItemLoading)
+    }, [process])
+
     return (
         <div className="char__list">
-                {errorMessage}
-                {spinner}
-                <Characters onCharacterSelected={props.onCharacterSelected} characters={characters} />
-            <button 
+            {elements}
+            <button
                 className="button button__main button__long"
                 disabled={newItemLoading}
                 style={{'display': charEnded ? 'none' : 'block'}}
@@ -56,7 +79,7 @@ const CharList = (props) => {
     )
 }
 
-CharList.propTypes = {                                        // https://ru.reactjs.org/docs/typechecking-with-proptypes.html
+CharList.propTypes = {
     onCharacterSelected: PropTypes.func.isRequired
 }
 

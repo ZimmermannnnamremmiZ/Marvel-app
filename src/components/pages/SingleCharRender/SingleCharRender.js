@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 
-import AppBanner from "../../appBanner/AppBanner";
-
 import './singleCharRender.scss'
 
 const SingleCharRender = ({data}) => {
@@ -15,8 +13,6 @@ const SingleCharRender = ({data}) => {
   }
 
   return (
-    <>
-        <AppBanner />
         <div className="single-char">
             <Helmet>
                 <meta
@@ -36,7 +32,6 @@ const SingleCharRender = ({data}) => {
                 </div>
             </Link>
         </div>
-    </>
   )
 }
 
