@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 
 const Characters = ({characters, onCharacterSelected}) => {
     const charRefs = useRef([]);
-
     const onCharacterFocus = (id) => {
         charRefs.current.forEach(item => item.classList.remove('char__item_selected'))
         charRefs.current[id].classList.add('char__item_selected')
@@ -15,7 +14,7 @@ const Characters = ({characters, onCharacterSelected}) => {
         return item === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg' ? {
             objectFit: "cover", objectPosition: "0"} : {objectFit: 'cover'};
     }
-    
+
     return (
         <TransitionGroup className="char__grid">
                 {characters.map((item, i) => (

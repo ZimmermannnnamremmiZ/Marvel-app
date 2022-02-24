@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import useMarvelService from '../../services/MarvelService';
 import PropTypes from 'prop-types';
@@ -36,7 +36,8 @@ const CharList = ({onCharacterSelected}) => {
     const {getAllCharacters, process, setProcess} = useMarvelService();
 
     useEffect(() => {
-        onRequest(offset, true)
+        onRequest(offset, true);
+        // eslint-disable-next-line
     }, [])
 
     const onCharactersLoaded = (newCharacters) => {
@@ -60,10 +61,14 @@ const CharList = ({onCharacterSelected}) => {
 
     const data = {onCharacterSelected, characters}
 
+    const elements = useMemo(() => {
+        return setContent(process, Characters, data, newItemLoading)
+    }, [process])
+
     return (
         <div className="char__list">
-            {setContent(process, Characters, data, newItemLoading)}
-            <button 
+            {elements}
+            <button
                 className="button button__main button__long"
                 disabled={newItemLoading}
                 style={{'display': charEnded ? 'none' : 'block'}}
