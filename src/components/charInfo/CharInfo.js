@@ -4,10 +4,11 @@ import { useMediaQuery } from 'react-responsive'
 
 import useMarvelService from '../../services/MarvelService';
 import setContent from '../../utils/setContent';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import './charInfo.scss';
 
-const  CharInfo = (props) => {
+const  CharInfo = ({characterId}) => {
 
     const [character, setCharacter] = useState(null)
     const [visibility, setVisibility] = useState()
@@ -16,35 +17,37 @@ const  CharInfo = (props) => {
 
     useEffect(() => {
         const updateCharacter = () => {
-            if (!props.characterId) {
+            if (!characterId) {
                 return;
             };
             clearError();
-            getCharacter(props.characterId)
+            getCharacter(characterId)
                 .then(onCharacterLoaded)
                 .then(() => setProcess('confirmed'))
-                .then(setVisibility({display: "block"}))
         }
         updateCharacter()
-    }, [props.characterId])
+    }, [characterId])
 
     const onCharacterLoaded = (character) => {
         setCharacter(character)
+        setVisibility({display: "block"})
     }
 
     const onClose = () => {
         setVisibility({display: "none"})
     }
 
-        return (
-            <div className="char__info" style={visibility}>
-                {setContent(process, View, character, onClose)}
-            </div>
-        )
+    const data = {character, onClose}
+
+    return (
+        <div className="char__info" style={visibility}>
+            {setContent(process, View, data)}
+        </div>
+    )
 }
 
-const View = ({onClose,  data}) => {
-    const {id, name, description, thumbnail, wiki, comics} = data;
+const View = ({character, onClose}) => {
+    const {id, name, description, thumbnail, wiki, comics} = character;
     const maxW1090px = useMediaQuery({ query: '(max-width: 1090px)' })
 
     const checkThumbnail = (item) => {
@@ -80,9 +83,9 @@ const View = ({onClose,  data}) => {
                     <div className="char__info-name">{name}</div>
                     <div className="char__btns">
                         <Link to={`/characters/${id}`} >
-                                    <button className='button button__main'>
-                                        <div className="inner">homepage</div>
-                                    </button>
+                            <button className='button button__main'>
+                                <div className="inner">homepage</div>
+                            </button>
                         </Link>
                         <a href={wiki} className="button button__secondary">
                             <div className="inner">Wiki</div>
@@ -96,7 +99,7 @@ const View = ({onClose,  data}) => {
             </div>
             <div className="char__comics">Comics:</div>
             <ul className="char__comics-list">
-                {/* {!comics.length ? <ErrorMessage /> : null} */}
+                {!comics.length ? <ErrorMessage /> : null}
                 {valOfComics()}
             </ul>
         </>
