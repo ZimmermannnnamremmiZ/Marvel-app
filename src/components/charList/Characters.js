@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
 import PropTypes from 'prop-types';
 
 const Characters = ({characters, onCharacterSelected}) => {
@@ -16,9 +15,8 @@ const Characters = ({characters, onCharacterSelected}) => {
     }
 
     return (
-        <TransitionGroup className="char__grid">
+        <div className="char__grid">
                 {characters.map((item, i) => (
-                    <CSSTransition key={item.id} timeout={600} classNames="item">
                         <div
                             ref={el => charRefs.current[i] = el} //массив ссылок на DOM элемент
                             tabIndex={0}
@@ -35,9 +33,8 @@ const Characters = ({characters, onCharacterSelected}) => {
                             <img style={checkThumbnail(item.thumbnail)} src={item.thumbnail} alt={item.name}/>
                             <div className="char__name">{item.name}</div>
                         </div>
-                    </CSSTransition>
                 ))}
-        </TransitionGroup>
+        </div>
     )
 }
 
