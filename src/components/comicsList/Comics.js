@@ -1,6 +1,5 @@
 import { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import {CSSTransition, TransitionGroup} from 'react-transition-group';
 
 
 const Comics = ({comics}) => {
@@ -19,7 +18,6 @@ const Comics = ({comics}) => {
 
     const everyComics = comics.map((item, i) => {
         return (
-                <CSSTransition key={item.i} timeout={600} classNames="item">
                     <div
                         ref={el => ComicsRefs.current[i] = el}   //массив ссылок на DOM элемент
                         key={item.id}
@@ -36,14 +34,13 @@ const Comics = ({comics}) => {
                             <div className="comics__item-price">{item.price}</div>
                         </Link>
                     </div>
-                </CSSTransition>
         )
     })
 
     return (
-        <TransitionGroup className="comics__grid">
+        <div className="comics__grid">
             {everyComics}
-        </TransitionGroup>
+        </div>
     )
 }
 
